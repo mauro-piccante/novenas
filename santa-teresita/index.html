@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
+<meta name='theme-color' content='#6b3a3f'>
+<title>Novena de las Rosas a Santa Teresita</title>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap' rel='stylesheet'>
+<style>
+:root{--bg:#f7f0ea;--card:#fffcf9;--ink:#2b2321;--muted:#7d6d66;--accent:#8e3448;--gold:#a9793a;--line:#eadbd2;--soft:#f6e8e8;--fs:19px;--rose:#c4566c;--rbg:#fbeef0}
+@media (prefers-color-scheme:dark){:root{--bg:#1a1214;--card:#24191c;--ink:#efe6e2;--muted:#ab9a94;--accent:#e693a4;--gold:#d8ac6c;--line:#3a2a2e;--soft:#2d1f23;--rose:#e693a4;--rbg:#2d1f23}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:var(--fs);line-height:1.55;padding-bottom:env(safe-area-inset-bottom)}
+header{background:linear-gradient(160deg,#4a2c25,#6b3a3f 55%,#8e3448);color:#f9efe9;padding:calc(50px + env(safe-area-inset-top)) 20px 18px;text-align:center;position:relative}
+header .cross{font-size:22px;color:#f0b8c2;letter-spacing:.3em}
+header h1{font-weight:600;font-size:1.6em;line-height:1.15;margin:6px 0 4px}
+header p{font-style:italic;opacity:.85;font-size:.95em}
+.tools{position:absolute;top:calc(10px + env(safe-area-inset-top));right:10px;left:10px;display:flex;justify-content:space-between;gap:6px}
+.tools div{display:flex;gap:6px}
+.tools button{background:rgba(255,255,255,.14);border:0;color:#fff;font:600 13px Inter,sans-serif;border-radius:8px;padding:6px 9px;cursor:pointer}
+.tools button.on{background:#f9efe9;color:#6b3a3f}
+.back{display:inline-block;font:500 12px Inter,sans-serif;color:#f9efe9;opacity:.8;text-decoration:none;margin-bottom:6px}
+nav.days{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:8px;overflow-x:auto;padding:10px 14px;scrollbar-width:none;justify-content:safe center}
+nav.days::-webkit-scrollbar{display:none}
+nav.days button{flex:0 0 auto;min-width:44px;height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 15px Inter,sans-serif;transition:.2s;cursor:pointer;position:relative}
+nav.days button.ok{border-color:var(--rose);color:var(--rose)}
+nav.days button.ok::after{content:'🌹';position:absolute;top:-6px;right:-4px;font-size:12px}
+nav.days button.on{background:var(--accent);color:var(--bg);border-color:var(--accent);transform:scale(1.06)}
+main{max-width:640px;margin:0 auto;padding:16px 14px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.label{font:600 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+h2{font-size:1.35em;font-weight:600;line-height:1.2;margin-bottom:10px;color:var(--accent)}
+p{margin-bottom:10px}
+.v{color:var(--accent);font-weight:700;margin-right:4px}
+.rubric{font:400 13px/1.5 Inter,sans-serif;color:var(--muted);margin:8px 0}
+textarea{width:100%;min-height:70px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px;font:inherit;font-size:.95em;resize:vertical}
+.int{color:var(--rose);font-style:italic}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:4px 0 6px}
+.progress i{display:block;height:100%;background:var(--rose);width:0;transition:.3s}
+.bead{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px 54px;margin:10px 0;color:inherit;font:inherit;position:relative;cursor:pointer;transition:.2s}
+.bead::before{content:attr(data-n);position:absolute;left:12px;top:14px;width:30px;height:30px;border-radius:50%;border:2px solid var(--rose);display:grid;place-items:center;font:600 13px Inter,sans-serif;color:var(--rose)}
+.bead.done{background:var(--rbg);opacity:.6}
+.bead.done::before{content:'🌹';border-color:transparent;font-size:18px}
+.bead strong{display:block;color:var(--accent);font-size:1.05em}
+.bead .r{font-style:italic;color:var(--rose)}
+.bead .after{font:400 13px/1.5 Inter,sans-serif;color:var(--muted);margin-top:6px}
+.finish{width:100%;padding:14px;border-radius:12px;border:0;background:var(--accent);color:var(--bg);font:600 15px Inter,sans-serif;margin-top:6px;cursor:pointer}
+.finish.ok{background:var(--rbg);color:var(--rose)}
+.pager{display:flex;gap:10px}
+.pager button{flex:1;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--accent);font:600 15px Inter,sans-serif;cursor:pointer}
+.pager button:disabled{opacity:.35}
+footer{text-align:center;font:400 12px/1.6 Inter,sans-serif;color:var(--muted);padding:0 20px 30px}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<header>
+  <div class='tools'>
+    <div><button id='bES' onclick='setLang("es")'>ES</button><button id='bIT' onclick='setLang("it")'>IT</button></div>
+    <div><button onclick='fs(-1)' aria-label='A−'>A−</button><button onclick='fs(1)' aria-label='A+'>A+</button></div>
+  </div>
+  <a class='back' id='back' href='../'></a>
+  <div class='cross'>✿ ✝ ✿</div>
+  <h1 id='h1'></h1>
+  <p id='sub'></p>
+</header>
+<nav class='days' id='nav'></nav>
+<main id='app'></main>
+<footer id='foot'></footer>
+<script>
+const VIDEO='https://www.youtube.com/watch?v=7VHrn3iKvJ4';
+
+const T={
+es:{
+  back:`← Todas las novenas`,
+  title:`Novena de las Rosas`,
+  sub:`a Santa Teresita del Niño Jesús`,
+  how:`Se reza nueve días seguidos. Cada día: la oración a la Santísima Trinidad, la petición y 24 Glorias, uno por cada año que Santa Teresita vivió en la tierra. Toca cada invocación para marcarla.`,
+  intLabel:`Mi petición`,
+  intPh:`Escribe aquí la gracia que pides en esta novena…`,
+  intNote:`La petición queda visible mientras la página está abierta.`,
+  intEmpty:`[tu petición]`,
+  open:`Inicio`,
+  sign:`En el nombre del Padre y del Hijo y del Espíritu Santo. Amén.`,
+  prayerT:`Oración a la Santísima Trinidad`,
+  prayer:`Santísima Trinidad, Padre, Hijo y Espíritu Santo, yo os agradezco todas las gracias con que enriquecisteis el alma de vuestra sierva Teresita del Niño Jesús durante los veinticuatro años que pasó en la tierra, y por los méritos de tan querida santa, concededme la gracia que ardientemente os pido, si fuere conforme a vuestra santísima voluntad y para salvación de mi alma. Amén.`,
+  ask:`Pedimos en este momento la gracia que deseamos alcanzar:`,
+  day:(d)=>`Día ${d} de 9`,
+  glorias:`Las 24 Glorias`,
+  pray:`ruega por nosotros`,
+  of:`de`,
+  gloria:`Gloria al Padre y al Hijo y al Espíritu Santo, como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.`,
+  inv:[`Santa Teresita del Niño Jesús`,`Ángel de inocencia`,`Alegría de vuestros padres`,`Modelo de los niños`,`Esposa de Jesús Eucarístico`,`Espejo de los que hacen la primera comunión`,`Devotísima del Santísimo Escapulario`,`Ejemplo de pobreza`,`Ejemplo de castidad`,`Ejemplo de obediencia`,`Hija predilecta de María`,`Florecita de Jesús`,`Madre de innumerables almas`,`Ángel de caridad`,`Violeta de humildad`,`Patrona de las misiones`,`Lirio purísimo del Carmelo`,`Rosa deshojada de amor`,`Mártir de amor`,`Encanto de cielos y tierra`,`Maestra de infancia espiritual`,`Abogada de los sacerdotes`,`Tú que pasas tu cielo haciendo el bien en la tierra`,`Tú que prometiste una lluvia de rosas`],
+  end:`Final`,
+  blessNote:`En el vídeo la bendición la da el sacerdote.`,
+  bless:`<span class='v'>V.</span>El Señor esté con ustedes.<br><span class='v'>R.</span>Y con tu espíritu.</p><p>Por intercesión de la Virgen del Carmen y de Santa Teresita del Niño Jesús, la bendición de Dios todopoderoso, Padre, Hijo y Espíritu Santo, descienda sobre ustedes y permanezca para siempre. Amén.`,
+  salve:`Salve María.`,
+  rose:`Según la tradición, Santa Teresita responde a quien reza esta novena enviando una rosa, como señal de que ha escuchado su petición.`,
+  done:(d)=>`He rezado el día ${d}`,
+  doneOk:(d)=>`Día ${d} rezado 🌹`,
+  prev:(d)=>`← Día ${d}`, next:(d)=>`Día ${d} →`,
+  foot:`Texto de la novena tal como la reza el P. Íñigo Abbad EP en el <a href='${VIDEO}' target='_blank' rel='noopener'>vídeo de los Heraldos del Evangelio El Salvador</a>.<br>Fiesta de Santa Teresita: 1 de octubre.`
+},
+it:{
+  back:`← Tutte le novene`,
+  title:`Novena delle Rose`,
+  sub:`a Santa Teresa di Gesù Bambino`,
+  how:`Si recita per nove giorni di seguito. Ogni giorno: la preghiera alla Santissima Trinità, la richiesta e 24 Gloria, uno per ogni anno che Santa Teresa visse sulla terra. Tocca ogni invocazione per segnarla.`,
+  intLabel:`La mia richiesta`,
+  intPh:`Scrivi qui la grazia che chiedi in questa novena…`,
+  intNote:`La richiesta resta visibile finché la pagina è aperta.`,
+  intEmpty:`[la tua richiesta]`,
+  open:`Inizio`,
+  sign:`Nel nome del Padre e del Figlio e dello Spirito Santo. Amen.`,
+  prayerT:`Preghiera alla Santissima Trinità`,
+  prayer:`Santissima Trinità, Padre, Figlio e Spirito Santo, vi ringrazio per tutte le grazie con cui avete arricchito l’anima della vostra serva Teresa di Gesù Bambino durante i ventiquattro anni che trascorse sulla terra; e per i meriti di una santa tanto cara, concedetemi la grazia che ardentemente vi chiedo, se è conforme alla vostra santissima volontà e per la salvezza della mia anima. Amen.`,
+  ask:`Chiediamo ora la grazia che desideriamo ottenere:`,
+  day:(d)=>`Giorno ${d} di 9`,
+  glorias:`I 24 Gloria`,
+  pray:`prega per noi`,
+  of:`di`,
+  gloria:`Gloria al Padre e al Figlio e allo Spirito Santo. Come era nel principio, e ora e sempre, nei secoli dei secoli. Amen.`,
+  inv:[`Santa Teresa di Gesù Bambino`,`Angelo d’innocenza`,`Gioia dei tuoi genitori`,`Modello dei bambini`,`Sposa di Gesù Eucaristia`,`Specchio di chi riceve la Prima Comunione`,`Devotissima del Santo Scapolare`,`Esempio di povertà`,`Esempio di castità`,`Esempio di obbedienza`,`Figlia prediletta di Maria`,`Piccolo fiore di Gesù`,`Madre di innumerevoli anime`,`Angelo di carità`,`Violetta di umiltà`,`Patrona delle missioni`,`Giglio purissimo del Carmelo`,`Rosa sfogliata d’amore`,`Martire d’amore`,`Incanto del cielo e della terra`,`Maestra dell’infanzia spirituale`,`Avvocata dei sacerdoti`,`Tu che passi il tuo cielo facendo il bene sulla terra`,`Tu che hai promesso una pioggia di rose`],
+  end:`Conclusione`,
+  blessNote:`Nel video la benedizione la dà il sacerdote.`,
+  bless:`<span class='v'>V.</span>Il Signore sia con voi.<br><span class='v'>R.</span>E con il tuo spirito.</p><p>Per intercessione della Vergine del Carmelo e di Santa Teresa di Gesù Bambino, la benedizione di Dio onnipotente, Padre, Figlio e Spirito Santo, discenda su di voi e con voi rimanga sempre. Amen.`,
+  salve:`Salve Maria.`,
+  rose:`Secondo la tradizione, Santa Teresa risponde a chi recita questa novena inviando una rosa, come segno di aver ascoltato la sua richiesta.`,
+  done:(d)=>`Ho pregato il giorno ${d}`,
+  doneOk:(d)=>`Giorno ${d} pregato 🌹`,
+  prev:(d)=>`← Giorno ${d}`, next:(d)=>`Giorno ${d} →`,
+  foot:`Testo della novena come la prega P. Íñigo Abbad EP nel <a href='${VIDEO}' target='_blank' rel='noopener'>video degli Araldi del Vangelo di El Salvador</a> (in spagnolo), tradotto in italiano.<br>Festa di Santa Teresa di Gesù Bambino: 1 ottobre.`
+}};
+
+function load(k,def){try{const v=localStorage.getItem(k);return v===null?def:JSON.parse(v)}catch(e){return def}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+const qs=new URLSearchParams(location.search).get('lang');
+let lang=(qs==='it'||qs==='es')?qs:load('novenas-lang',(navigator.language||'').toLowerCase().startsWith('it')?'it':'es');
+let daysDone=new Set(load('nt-days',[]));
+let day=Math.min(9,daysDone.size+1), intention='', beads=new Set(), size=19;
+const app=document.getElementById('app'), nav=document.getElementById('nav');
+
+function fs(d){size=Math.min(26,Math.max(15,size+d));document.documentElement.style.setProperty('--fs',size+'px')}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function setLang(l){lang=l;save('novenas-lang',l);try{history.replaceState(null,'','?lang='+l)}catch(e){}paint()}
+function setInt(v){intention=v;const s=document.getElementById('intShow');if(s)s.textContent=v.trim()?v.trim():T[lang].intEmpty}
+function drawNav(){nav.innerHTML=Array.from({length:9},(_,i)=>`<button class='${i+1===day?'on':''} ${daysDone.has(i+1)?'ok':''}' onclick='go(${i+1})'>${i+1}</button>`).join('');const b=nav.children[day-1];b&&b.scrollIntoView({inline:'center',block:'nearest'})}
+function go(n){day=n;beads=new Set();drawNav();render();window.scrollTo({top:0,behavior:'smooth'})}
+function tog(i){beads.has(i)?beads.delete(i):beads.add(i);document.querySelectorAll('.bead')[i].classList.toggle('done');document.getElementById('bar').style.width=(beads.size/24*100)+'%';document.getElementById('cnt').textContent=beads.size}
+function markDay(){daysDone.has(day)?daysDone.delete(day):daysDone.add(day);save('nt-days',[...daysDone]);drawNav();const b=document.getElementById('fin'),L=T[lang];b.className='finish'+(daysDone.has(day)?' ok':'');b.textContent=daysDone.has(day)?L.doneOk(day):L.done(day)}
+
+function paint(){
+  const L=T[lang];
+  document.documentElement.lang=lang;
+  document.title=`${L.title} ${L.sub}`;
+  document.getElementById('h1').textContent=L.title;
+  const bk=document.getElementById('back');bk.textContent=L.back;bk.href='../?lang='+lang;
+  document.getElementById('sub').textContent=L.sub;
+  document.getElementById('foot').innerHTML=L.foot;
+  document.getElementById('bES').className=lang==='es'?'on':'';
+  document.getElementById('bIT').className=lang==='it'?'on':'';
+  drawNav();render();
+}
+
+function render(){
+const L=T[lang], ok=daysDone.has(day);
+app.innerHTML=`
+<section class='card'>
+  <div class='label'>${L.day(day)}</div>
+  <p class='rubric' style='margin:0'>${L.how}</p>
+</section>
+
+<section class='card'>
+  <div class='label'>${L.intLabel}</div>
+  <textarea placeholder='${L.intPh}' oninput='setInt(this.value)'>${esc(intention)}</textarea>
+  <p class='rubric'>${L.intNote}</p>
+</section>
+
+<section class='card'>
+  <div class='label'>${L.open}</div>
+  <p><span class='v'>✝</span>${L.sign}</p>
+  <h2>${L.prayerT}</h2>
+  <p>${L.prayer}</p>
+  <p><em>${L.ask}</em> <span class='int' id='intShow'>${intention.trim()?esc(intention.trim()):L.intEmpty}</span></p>
+</section>
+
+<section class='card'>
+  <div class='label'>${L.day(day)}</div>
+  <h2>${L.glorias}</h2>
+  <div class='progress'><i id='bar' style='width:${beads.size/24*100}%'></i></div>
+  <p class='rubric'><span id='cnt'>${beads.size}</span> ${L.of} 24</p>
+  ${L.inv.map((x,i)=>`<button class='bead ${beads.has(i)?'done':''}' data-n='${i+1}' onclick='tog(${i})'><strong>${x},</strong><span class='r'>${L.pray}.</span><div class='after'>${L.gloria}</div></button>`).join('')}
+</section>
+
+<section class='card'>
+  <div class='label'>${L.end}</div>
+  <p>${L.bless}</p>
+  <p class='rubric'>${L.blessNote}</p>
+  <p><span class='v'>✝</span>${L.salve}</p>
+  <p class='rubric' style='margin-top:14px'>🌹 ${L.rose}</p>
+  <button id='fin' class='finish${ok?' ok':''}' onclick='markDay()'>${ok?L.doneOk(day):L.done(day)}</button>
+</section>
+
+<div class='pager'>
+  <button onclick='go(${day-1})' ${day===1?'disabled':''}>${L.prev(Math.max(1,day-1))}</button>
+  <button onclick='go(${day+1})' ${day===9?'disabled':''}>${L.next(Math.min(9,day+1))}</button>
+</div>`;
+}
+paint();
+</script>
+</body>
+</html>

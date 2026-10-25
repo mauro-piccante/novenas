@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang='it'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
+<meta name='theme-color' content='#5a3d22'>
+<meta name='apple-mobile-web-app-capable' content='yes'>
+<meta name='mobile-web-app-capable' content='yes'>
+<meta name='apple-mobile-web-app-title' content='Trentena'>
+<title>Trentena a San Giuseppe</title>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap' rel='stylesheet'>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#2a2620;--muted:#7a6f60;--accent:#6b4423;--gold:#b0833a;--line:#e6dccb;--soft:#f1e8da;--fs:19px}
+@media (prefers-color-scheme:dark){:root{--bg:#17120d;--card:#211a13;--ink:#ece6da;--muted:#a79f90;--accent:#d9a56b;--gold:#d9b06a;--line:#33291f;--soft:#2a2118}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:var(--fs);line-height:1.55;padding-bottom:env(safe-area-inset-bottom)}
+header{background:linear-gradient(160deg,#3f2915,#5a3d22 55%,#7a5530);color:#f7f1e3;padding:calc(50px + env(safe-area-inset-top)) 20px 18px;text-align:center;position:relative}
+header .cross{font-size:22px;color:#e2c07e;letter-spacing:.3em}
+header h1{font-weight:600;font-size:1.6em;line-height:1.15;margin:6px 0 4px}
+header p{font-style:italic;opacity:.85;font-size:.95em}
+.tools{position:absolute;top:calc(10px + env(safe-area-inset-top));right:10px;left:10px;display:flex;justify-content:space-between;gap:6px}
+.tools div{display:flex;gap:6px}
+.tools button{background:rgba(255,255,255,.14);border:0;color:#fff;font:600 13px Inter,sans-serif;border-radius:8px;padding:6px 9px;cursor:pointer}
+.tools button.on{background:#f7f1e3;color:#5a3d22}
+.back{display:inline-block;font:500 12px Inter,sans-serif;color:#f7f1e3;opacity:.8;text-decoration:none;margin-bottom:6px}
+main{max-width:640px;margin:0 auto;padding:16px 14px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.label{font:600 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+h2{font-size:1.35em;font-weight:600;line-height:1.2;margin-bottom:10px;color:var(--accent)}
+h3{font-size:1.1em;font-weight:600;margin:16px 0 4px}
+p{margin-bottom:10px}
+.v{color:var(--accent);font-weight:700;margin-right:4px}
+.rubric{font:400 13px/1.5 Inter,sans-serif;color:var(--muted);margin:8px 0}
+.rubric a{color:inherit}
+textarea{width:100%;min-height:70px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px;font:inherit;font-size:.95em;resize:vertical}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font:500 14px Inter,sans-serif}
+.row input[type=date]{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:8px 10px;font:500 14px Inter,sans-serif}
+.today{font-size:1.15em;margin:12px 0 4px}
+.today b{color:var(--accent)}
+.progress{height:6px;background:var(--soft);border-radius:3px;overflow:hidden;margin:8px 0 6px}
+.progress i{display:block;height:100%;background:var(--gold);width:0;transition:.3s}
+.int{color:var(--gold);font-style:italic}
+.bead{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 52px;margin:10px 0;color:inherit;font:inherit;position:relative;cursor:pointer;transition:.2s}
+.bead::before{content:attr(data-n);position:absolute;left:12px;top:13px;width:28px;height:28px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font:600 13px Inter,sans-serif;color:var(--gold)}
+.bead.done{opacity:.5}
+.bead.done::before{content:'✓';background:var(--gold);color:var(--card)}
+.grace{background:var(--soft);border-radius:12px;padding:14px 16px;margin:12px 0;font-style:italic}
+.grace .int{display:block;margin-top:6px;font-style:normal}
+.btn{display:block;width:100%;padding:15px;border-radius:12px;border:0;background:var(--accent);color:var(--bg);font:600 15px Inter,sans-serif;margin-top:6px}
+.btn.done{background:var(--soft);color:var(--accent)}
+.link{background:none;border:0;color:var(--accent);font:600 13px Inter,sans-serif;text-decoration:underline;cursor:pointer;padding:0}
+footer{text-align:center;font:400 12px/1.6 Inter,sans-serif;color:var(--muted);padding:0 20px 30px}
+</style>
+</head>
+<body>
+<header>
+  <div class='tools'>
+    <div><button id='bES' onclick='setLang("es")' aria-label='Español'>ES</button><button id='bIT' onclick='setLang("it")' aria-label='Italiano'>IT</button></div>
+    <div><button id='fsMinus' onclick='fs(-1)' aria-label='Testo più piccolo'>A−</button><button id='fsPlus' onclick='fs(1)' aria-label='Testo più grande'>A+</button></div>
+  </div>
+  <a class='back' id='back' href='../'>← Tutte le novene</a>
+  <div class='cross'>✦ ✝ ✦</div>
+  <h1 id='h1'>Trentena a San Giuseppe</h1>
+  <p id='sub'>Da recitarsi per trenta giorni consecutivi</p>
+</header>
+<main id='app'></main>
+<footer id='foot'>Testo della Trentena a San Giuseppe diffuso dalle Suore del Verbo Incarnato.<br>Trenta giorni in riverenza ai trent’anni che San Giuseppe visse con Gesù e Maria.<br>Solennità di San Giuseppe: 19 marzo (iniziando il 18 febbraio si conclude nel giorno della festa).</footer>
+<script>
+const FONTE='https://elefantsoftware.altervista.org/rosario/preghiere/trentena_a_san_giuseppe.htm';
+const FONTE_ES='https://sanjoseytodoslossantos.blogspot.com/2021/08/treintena-san-jose.html';
+const N=30;
+
+const INTRO=[
+`O amabilissimo patriarca San Giuseppe, dall’abisso della mia piccolezza e miseria ti contemplo con emozione ed allegria della mia anima sul tuo trono del cielo come gloria e gioia dei beati, ma anche come padre degli orfani in terra, consolatore dei tristi, protettore degli invalidi, compagno degli angeli e dei santi, davanti al trono di Dio, del tuo Gesù e della tua Santa Sposa.`,
+`Per questo io, povero, impotente e bisognoso, a te rivolgo, oggi e sempre, le mie lacrime, le mie pene e le grida della mia anima, i miei patimenti e le mie speranze e oggi specialmente ti porto davanti al tuo altare e alla tua immagine, una pena che tu consoli, un male a cui tu dai rimedio, una disgrazia che tu impedisci, una necessità che tu assisti, una grazia che ottieni per me ed i miei cari.`,
+`E per commuoverti ed obbligarti ad accettarmi ed ad ottenerla te la chiederò per 30 giorni consecutivi, in riverenza ai 30 anni che vivesti con Gesù e Maria sulla terra, te lo chiederò urgentemente e con fiducia invocandoti con tutti i tuoi titoli, perché tu mi compatisca, e con tutti i motivi che ho per sperare che non ritardi all’udire la mia domanda e rimediare alla mia necessità, essendo tanto certa la mia fede nella tua bontà e potere che al sentirla ti sentiresti anche obbligato a ottenermi e darmi anche di più di ciò che chiedo e:`
+];
+const PETIZ=[
+`Te lo chiedo per la Bontà Divina che obbligò il Verbo Eterno ad incarnarsi e nascere nella povera natura umana, come Dio da Dio, Dio Uomo, Dio dell’uomo.`,
+`Te lo supplico per la tua ansietà immensa nel sentirti obbligato ad abbandonare la tua Santa Sposa.`,
+`Te lo prego per la tua rassegnazione dolorosissima nel trovare una stalla ed una mangiatoia come edificio e culla di Dio nato tra gli uomini.`,
+`Te lo imploro per la dolorosa ed umiliante circoncisione del tuo Gesù, e per il Santo, Glorioso e Dolcissimo Nome che desti per ordine dell’Eterno.`,
+`Te lo chiedo per la tua sorpresa nell’udire dall’Angelo la morte decretata contro tuo Figlio Dio, per la tua molto obbediente fuga in Egitto, per i pericoli del cammino, per la povertà estrema dell’esilio e per la tua ansia di tornare dall’Egitto a Nazareth.`,
+`Te lo chiedo per la tua afflizione nel perdere tuo Figlio, e per la tua consolazione soavissima nell’incontrarlo nel tempio, e per la tua felicità negli anni in cui vivesti a Nazareth con Gesù e Maria.`,
+`Te lo chiedo e spero per l’eroico sacrificio con il quale offristi come vittima il tuo Gesù al Dio Eterno, per la croce e per la morte, per i nostri peccati e per la nostra redenzione.`,
+`Te lo chiedo per la dolorosa previsione che ti fece tutti i giorni contemplare quelle mani infantili – forate dopo sulla croce da appuntiti chiodi, quella testa che si inclinava dolcissimamente sul tuo petto – coronata di spine, quel corpo divino che stringevi al tuo cuore – nudo, insanguinato e steso sulle braccia della croce, in quell’ultimo momento in cui lo vedesti spirare e morire.`,
+`Te lo chiedo per il tuo dolcissimo transito da questa vita tra le braccia di Gesù e Maria e per la tua entrata nel limbo dei giusti ed infine nel Cielo.`,
+`Ti supplico per la tua gioia e per la tua gloria, quando contemplasti la Resurrezione del tuo Gesù, la sua salita ed entrata nei Cieli e sul trono come Re immortale dei secoli.`,
+`Te lo domando per la tua gioia ineffabile quando vedesti uscire dal sepolcro la tua Santissima Sposa resuscitata e salire ai Cieli trasportata dagli angeli e incoronata su un soglio accanto al tuo.`,
+`Te lo chiedo, prego e spero per i tuoi lavori, pene e sacrifici in terra, e per i tuoi trionfi e glorie e felice beatitudine nel Cielo con tuo Figlio Gesù e la tua Sposa Santa Maria.`
+];
+const FINALE=`O mio buon patriarca san Giuseppe, io, ispirato dagli insegnamenti della santa Chiesa e dei suoi dottori e teologi, e dal senso universale del popolo cristiano, sento in me una forza misteriosa che mi obbliga a chiederti e supplicarti e sperare che tu mi ottenga da Dio la grande e straordinaria grazia che metterò davanti al tuo trono di bontà e potere nel cielo.`;
+const OREMUS=`Oh Dio, che con ineffabile Provvidenza eleggesti il beato san Giuseppe come sposo della tua Madre Santissima, ti preghiamo che ci conceda di avere come intercessore nel Cielo, colui che veneriamo come protettore sulla terra, che vive e regna nei secoli dei secoli. Amen.`;
+
+const PER_CARI=`Ottieni anche per i miei cari e per coloro che mi hanno chiesto di pregare per loro tutto ciò che desiderano e che è loro conveniente.`;
+const A_TE=`A te, o beato Giuseppe, stretti dalla tribolazione ricorriamo, e fiduciosi invochiamo il tuo patrocinio, dopo quello della tua Santissima Sposa. Per quel sacro vincolo di carità, che ti strinse all’Immacolata Vergine Madre di Dio, e per l’amore paterno che portasti al fanciullo Gesù, riguarda, te ne preghiamo, con occhio benigno, la cara eredità che Gesù Cristo acquistò col suo sangue, e col tuo potere ed aiuto sovvieni ai nostri bisogni.
+Proteggi, o provvido custode della divina Famiglia, l’eletta prole di Gesù Cristo; allontana da noi, o padre amatissimo, gli errori e i vizi che ammorbano il mondo; assistici propizio dal cielo in questa lotta contro il potere delle tenebre, o nostro fortissimo protettore; e come un tempo salvasti dalla morte la minacciata vita del pargoletto Gesù, così ora difendi la santa Chiesa di Dio dalle ostili insidie e da ogni avversità; e stendi ognora sopra ciascuno di noi il tuo patrocinio, affinché a tuo esempio e mediante il tuo soccorso, possiamo virtuosamente vivere, piamente morire e conseguire l’eterna beatitudine in cielo. Amen.`;
+const PATER=`Padre nostro, che sei nei cieli, sia santificato il tuo nome, venga il tuo regno, sia fatta la tua volontà, come in cielo così in terra. Dacci oggi il nostro pane quotidiano, e rimetti a noi i nostri debiti come anche noi li rimettiamo ai nostri debitori, e non abbandonarci alla tentazione, ma liberaci dal male. Amen.`;
+const AVE=`Ave, o Maria, piena di grazia, il Signore è con te. Tu sei benedetta fra le donne e benedetto è il frutto del tuo seno, Gesù. Santa Maria, Madre di Dio, prega per noi peccatori, adesso e nell’ora della nostra morte. Amen.`;
+const GLORIA=`Gloria al Padre e al Figlio e allo Spirito Santo. Come era nel principio, e ora e sempre, nei secoli dei secoli. Amen.`;
+
+/* ---------- testo spagnolo: originale della Treintena a San José (FONTE_ES) ---------- */
+const INTRO_ES=[
+`¡Oh amabilísimo Patriarca, Señor San José! Desde el abismo de mi pequeñez, dolor y ansiedad, os contemplo con emoción y alegría de mi alma en vuestro solio del cielo, como gloria y gozo de los Bienaventurados, pero también como padre de los huérfanos en la tierra, consolador de los tristes, amparador de los desvalidos, gozo y amor de tus devotos ante el trono de Dios, de tu Jesús y de tu santa Esposa.`,
+`Por eso yo, pobre, desvalido, triste y necesitado, a Vos dirijo hoy y siempre mis lágrimas y penas, mis ruegos y clamores del alma, mis arrepentimientos y mis esperanzas; y hoy especialmente os traigo ante vuestro altar y vuestra imagen una pena que consoléis, un mal que remediéis, una desgracia que impidáis, una necesidad que socorráis, una gracia que obtengáis para mí y para mis seres queridos.`,
+`Y para conmoveros y obligaros a oírme y conseguírmelo, os lo pediré y demandaré durante treinta días continuos en reverencia a los treinta años que vivisteis en la tierra con Jesús y María, y os lo pediré, urgente y confiadamente, invocando todos los títulos que tenéis para compadeceros de mí y todos los motivos que tengo para esperar que no dilataréis el oír mi petición y remediar mi necesidad; siendo tan cierta mi fe en vuestra bondad y poder, que al sentirla os sentiréis también obligado a obtener y darme más aún de lo que os pido, y deseo.`
+];
+const PETIZ_ES=[
+`Os lo pido por la bondad divina que obligó al Verbo Eterno a encarnarse y nacer en la pobre naturaleza humana, como Dios de Dios, Dios Hombre, Dios del Hombre, Dios con el Hombre.`,
+`Os lo suplico por vuestra ansiedad de sentiros obligado a abandonar a vuestra santa Esposa, dejándola sola, y yendo solo sin ella.`,
+`Os lo ruego por vuestra resignación dolorosísima para buscar un establo y un pesebre para palacio y cuna de Dios, nacido entre los hombres, que le obligan a nacer entre animales.`,
+`Os lo imploro por la dolorosísima y humillante circuncisión de vuestro Jesús, y por el santo y dulcísimo nombre que le impusisteis por orden del Eterno para consuelo, amor y esperanza nuestra.`,
+`Os lo demando por vuestro sobresalto al oír del Ángel la muerte decretada contra vuestro Hijo Dios, por vuestra obedientísima huida a Egipto, por las penalidades y peligros del camino, por la pobreza del destierro, y por vuestras ansiedades al volver de Egipto a Nazaret.`,
+`Os lo pido por vuestra aflicción dolorosa de tres días al perder a vuestro Hijo, y por vuestra consolación suavísima al encontrarle en el templo; por vuestra felicidad inefable de los treinta años que vivisteis en Nazaret con Jesús y María sujetos a vuestra autoridad y providencia.`,
+`Os lo ruego y espero por el heroico sacrificio, con que ofrecisteis la víctima de vuestro Jesús al Dios Eterno para la cruz y para la muerte por nuestros pecados y nuestra redención.`,
+`Os lo demando por la dolorosa previsión, que os hacía todos los días contemplar aquellas manos infantiles, taladradas un día en la Cruz por agudos clavos; aquella cabeza que se reclinaba dulcísimamente sobre vuestro pecho, coronada de espinas; aquel cuerpo divino que estrechabais contra vuestro corazón, ensangrentado y extendido sobre los brazos de la Cruz; aquel último momento en que le veíais expirar y morir por mí, por mi alma, por mis pecados.`,
+`Os lo pido por vuestro dulcísimo tránsito de esta vida en los brazos de Jesús y María, y vuestra entrada en el Limbo de los Justos en el cielo, donde tenéis vuestro trono de poder.`,
+`Os lo suplico por vuestro gozo y vuestra gloria, cuando contemplasteis la Resurrección de vuestro Jesús, su subida y entrada en los cielos y su trono de Rey inmortal de los siglos.`,
+`Os lo demando por vuestra dicha inefable cuando visteis salir del sepulcro a vuestra santísima Esposa, resucitada, y ser subida a los cielos por ángeles, y coronada por el Eterno, y entronizada en un solio junto al vuestro como Madre, Señora y Reina de los ángeles y hombres.`,
+`Os lo pido y ruego y espero confiadamente por vuestros trabajos, penalidades y sacrificios en la tierra, y por vuestros triunfos y gloria feliz bienaventuranza en el Cielo con vuestro Hijo Jesús y vuestra esposa Santa María.`
+];
+const FINALE_ES=`¡Oh mi buen San José! Yo, inspirado en las enseñanzas de la Iglesia Santa y de sus Doctores y Teólogos y en el sentido universal del pueblo cristiano, siento en mí una fuerza misteriosa, que me alienta y obliga a pediros y suplicaros y esperar me obtengáis de Dios la grande y extraordinaria gracia que voy a poner ante este tu altar e imagen y ante tu trono de bondad y poder en el Cielo: la espero, Santo Patriarca.`;
+const OREMUS_ES=`Oh Dios, que con inefable providencia te dignaste escoger al bienaventurado José por Esposo de tu Madre Santísima; concédenos que, pues le veneramos como protector en la tierra, merezcamos tenerle como intercesor en los cielos. Oh Dios, que vives y reinas en los siglos de los siglos. Amén.`;
+const PER_CARI_ES=`Obtenedme también para los míos y los que me han pedido ruegue por ellos, todo cuanto desean y les es conveniente.`;
+/* León XIII, texto de la Santa Sede (vatican.va, Quamquam pluries) */
+const A_TE_ES=`A ti, bienaventurado san José, acudimos en nuestra tribulación, y después de implorar el auxilio de tu santísima esposa, solicitamos también confiadamente tu patrocinio. Con aquella caridad que te tuvo unido con la Inmaculada Virgen María, Madre de Dios, y por el paterno amor con que abrazaste al Niño Jesús, humildemente te suplicamos que vuelvas benigno los ojos a la herencia que con su Sangre adquirió Jesucristo, y con tu poder y auxilio socorras nuestras necesidades.
+Protege, oh providentísimo Custodio de la divina Familia, la escogida descendencia de Jesucristo; aleja de nosotros, oh padre amantísimo, este flagelo de errores y vicios. Asístenos propicio desde el cielo, en esta lucha contra el poder de las tinieblas; y como en otro tiempo libraste de la muerte la vida amenazada del Niño Jesús, así ahora defiende a la santa Iglesia de Dios de las hostiles insidias y de toda adversidad. Y a cada uno de nosotros protégenos con tu constante patrocinio, para que, a ejemplo tuyo, y sostenidos por tu auxilio, podamos vivir y morir santamente y alcanzar en los cielos la eterna bienaventuranza. Amén.`;
+const PATER_ES=`Padre nuestro, que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.`;
+const AVE_ES=`Dios te salve, María, llena eres de gracia, el Señor es contigo. Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén.`;
+const GLORIA_ES=`Gloria al Padre y al Hijo y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.`;
+
+const TX={
+it:{INTRO,PETIZ,FINALE,OREMUS,PER_CARI,A_TE,PATER,AVE,GLORIA},
+es:{INTRO:INTRO_ES,PETIZ:PETIZ_ES,FINALE:FINALE_ES,OREMUS:OREMUS_ES,PER_CARI:PER_CARI_ES,A_TE:A_TE_ES,PATER:PATER_ES,AVE:AVE_ES,GLORIA:GLORIA_ES}
+};
+
+/* ---------- testi dell’interfaccia ---------- */
+const T={
+it:{
+  loc:'it-IT', title:'Trentena a San Giuseppe', appTitle:'Trentena', h1:'Trentena a San Giuseppe', sub:'Da recitarsi per trenta giorni consecutivi',
+  back:'← Tutte le novene', smaller:'Testo più piccolo', bigger:'Testo più grande',
+  foot:`Testo della Trentena a San Giuseppe diffuso dalle Suore del Verbo Incarnato.<br>Trenta giorni in riverenza ai trent’anni che San Giuseppe visse con Gesù e Maria.<br>Solennità di San Giuseppe: 19 marzo (iniziando il 18 febbraio si conclude nel giorno della festa).`,
+  today:'oggi', yesterday:'ieri',
+  pick:`Scegli il giorno in cui inizi. Poi la pagina avanza da sola, un giorno alla volta, man mano che segni le preghiere completate.`,
+  willStart:d=>`Inizierai <b>${d}</b>.`,
+  completed:w=>`Hai completato la trentena${w?`, ${w}`:''}. San Giuseppe, prega per noi.`,
+  prayToday:n=>`Oggi preghi il <b>giorno ${n} di ${N}</b>.`,
+  prayedToday:n=>`Giorno ${n} pregato oggi. Domani continui con il <b>giorno ${n+1}</b>.`,
+  stopped:(b,t)=>`Ti eri fermato qui: avevi recitato ${b} suppliche su ${t}.`,
+  lastDay:(l,w)=>`Ultimo giorno pregato: il ${l}${w?`, ${w}`:''}.`,
+  path:'Il mio cammino', start:'Inizio', startToday:'Inizio oggi',
+  daysOf:c=>`${c===1?'1 giorno':c+' giorni'} su ${N} pregati.`, restart:'Ricomincia',
+  confirm:'Ricominciare la trentena? Si cancellano data di inizio e giorni segnati (l’intenzione resta).',
+  keepTitle:'Per non perdere il punto',
+  keepText:'Il cammino è salvato su questo telefono. Per conservarlo al sicuro aggiungi la pagina alla schermata Home (Condividi → Aggiungi alla schermata Home) e aprila sempre da lì. Non cancellare i dati del browser durante la trentena.',
+  graceTitle:'La grazia che chiedo', gracePh:'Scrivi qui la grazia che chiedi a San Giuseppe in questi trenta giorni…',
+  graceNote:'Resta salvata solo su questo dispositivo e compare al momento della richiesta.', intEmpty:'[la grazia che chiedi]',
+  dayOf:n=>`Giorno ${n} di ${N}`, prayer:'Preghiera a San Giuseppe',
+  cross:'Nel nome del Padre e del Figlio e dello Spirito Santo. Amen.',
+  twelve:'Le dodici suppliche', tapBead:'Tocca ogni supplica per segnarla mentre preghi.', of:'di',
+  graceRubric:'Si chiede la grazia che si desidera ottenere.',
+  vers:'San Giuseppe, prega per noi.', resp:'Perché siamo resi degni delle promesse di Cristo.',
+  oremus:'Preghiamo', leo:'Preghiera a San Giuseppe', leoNote:'Di papa Leone XIII, dall’enciclica Quamquam pluries (1889).',
+  credits:`Testo dalla <a href='${FONTE}' target='_blank' rel='noopener'>Trentena a San Giuseppe</a> delle Suore del Verbo Incarnato. La conclusione segue l’originale spagnolo della <a href='${FONTE_ES}' target='_blank' rel='noopener'>Treintena a San José</a>: la richiesta per i propri cari e il versetto sono tradotti da lì. Il segno di croce iniziale e finale è un’aggiunta di questa pagina.`,
+  undo:n=>`✓ Giorno ${n} pregato · tocca per annullare`, markDay:n=>`Segna il giorno ${n} come pregato`
+},
+es:{
+  loc:'es-ES', title:'Treintena a San José', appTitle:'Treintena', h1:'Treintena a San José', sub:'Para rezar durante treinta días consecutivos',
+  back:'← Todas las novenas', smaller:'Texto más pequeño', bigger:'Texto más grande',
+  foot:`Texto original de la Treintena a San José.<br>Treinta días en reverencia a los treinta años que San José vivió con Jesús y María.<br>Solemnidad de San José: 19 de marzo (si se empieza el 18 de febrero, termina el día de la fiesta).`,
+  today:'hoy', yesterday:'ayer',
+  pick:`Elige el día en que empiezas. Después la página avanza sola, un día cada vez, a medida que marcas las oraciones completadas.`,
+  willStart:d=>`Empezarás el <b>${d}</b>.`,
+  completed:w=>`Has completado la treintena${w?(w==='hoy'||w==='ayer'?` ${w}`:` el ${w}`):''}. San José, ruega por nosotros.`,
+  prayToday:n=>`Hoy rezas el <b>día ${n} de ${N}</b>.`,
+  prayedToday:n=>`Día ${n} rezado hoy. Mañana sigues con el <b>día ${n+1}</b>.`,
+  stopped:(b,t)=>`Te habías quedado aquí: habías rezado ${b} súplicas de ${t}.`,
+  lastDay:(l,w)=>`Último día rezado: el ${l}${w?` (${w})`:''}.`,
+  path:'Mi camino', start:'Inicio', startToday:'Empiezo hoy',
+  daysOf:c=>`${c===1?'1 día':c+' días'} de ${N} rezados.`, restart:'Empezar de nuevo',
+  confirm:'¿Empezar de nuevo la treintena? Se borran la fecha de inicio y los días marcados (la intención se conserva).',
+  keepTitle:'Para no perder el hilo',
+  keepText:'El camino se guarda en este teléfono. Para conservarlo a salvo, añade la página a la pantalla de inicio (Compartir → Añadir a pantalla de inicio) y ábrela siempre desde ahí. No borres los datos del navegador durante la treintena.',
+  graceTitle:'La gracia que pido', gracePh:'Escribe aquí la gracia que pides a San José en estos treinta días…',
+  graceNote:'Se guarda solo en este dispositivo y aparece en el momento de la petición.', intEmpty:'[la gracia que pides]',
+  dayOf:n=>`Día ${n} de ${N}`, prayer:'Oración a San José',
+  cross:'En el nombre del Padre, y del Hijo, y del Espíritu Santo. Amén.',
+  twelve:'Las doce súplicas', tapBead:'Toca cada súplica para marcarla mientras rezas.', of:'de',
+  graceRubric:'Aquí, levantado el corazón a lo alto, se le pedirá al Santo con amorosa instancia la gracia que se desea.',
+  vers:'San José, rogad por nosotros.', resp:'Para que seamos dignos de alcanzar las promesas de Jesucristo.',
+  oremus:'Oremos', leo:'Oración a San José', leoNote:'Del papa León XIII, de la encíclica Quamquam pluries (1889), en el texto de la Santa Sede.',
+  credits:`Texto original español de la <a href='${FONTE_ES}' target='_blank' rel='noopener'>Treintena a San José</a>. La oración de León XIII sigue el texto de la Santa Sede. La señal de la cruz al principio y al final es un añadido de esta página.`,
+  undo:n=>`✓ Día ${n} rezado · toca para deshacer`, markDay:n=>`Marcar el día ${n} como rezado`
+}
+};
+
+/* ---------- lingua: ?lang= → novenas-lang (condivisa nel sito) → lingua del browser ---------- */
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+const qLang=new URLSearchParams(location.search).get('lang');
+const sLang=lsGet('novenas-lang');
+let lang=(qLang==='es'||qLang==='it')?qLang:(sLang==='es'||sLang==='it')?sLang:((navigator.language||'').toLowerCase().startsWith('it')?'it':'es');
+
+/* ---------- stato (salvato solo nel browser) ---------- */
+const KEY='trentena-sg';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+/* chiede al browser di non cancellare questi dati */
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const S=Object.assign({start:'',done:[],doneOn:{},beads:{},cur:0,intention:'',size:19},load());
+let day=1, beads=new Set();
+const app=document.getElementById('app');
+
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function parse(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
+function todayN(){if(!S.start)return 0;const t=new Date();t.setHours(0,0,0,0);return Math.round((t-parse(S.start))/864e5)+1}
+function dateOf(n){const d=parse(S.start);d.setDate(d.getDate()+n-1);return d.toLocaleDateString(T[lang].loc,{weekday:'long',day:'numeric',month:'long'})}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+
+function fs(d){S.size=Math.min(26,Math.max(15,S.size+d));document.documentElement.style.setProperty('--fs',S.size+'px');save()}
+function setStart(v){S.start=v;save();render()}
+function setInt(v){S.intention=v;save();const s=document.getElementById('intShow');if(s)s.textContent=v.trim()||T[lang].intEmpty}
+function open_(n){day=Math.min(N,Math.max(1,n));beads=new Set(S.beads[day]||[]);S.cur=day;save()}
+function tog(i){beads.has(i)?beads.delete(i):beads.add(i);beads.size?S.beads[day]=[...beads]:delete S.beads[day];save();document.querySelectorAll('.bead')[i].classList.toggle('done');document.getElementById('bar').style.width=(beads.size/PETIZ.length*100)+'%';document.getElementById('cnt').textContent=beads.size}
+function mark(){const i=S.done.indexOf(day);if(i<0){S.done.push(day);S.doneOn[day]=iso(new Date());delete S.beads[day]}else{S.done.splice(i,1);delete S.doneOn[day]}save();render();window.scrollTo({top:0,behavior:'smooth'})}
+function reset(){if(confirm(T[lang].confirm)){S.start='';S.done=[];S.doneOn={};S.beads={};S.cur=0;save();open_(1);render();window.scrollTo({top:0,behavior:'smooth'})}}
+
+/* il giorno sale da solo: è il successivo all’ultimo pregato.
+   Se l’ultimo l’hai pregato oggi, resta quello fino a domani. */
+function lastDone(){return S.done.length?Math.max(...S.done):0}
+function when(d){if(!d)return '';const t=new Date();t.setHours(0,0,0,0);const g=Math.round((t-parse(d))/864e5);const U=T[lang];return g===0?U.today:g===1?U.yesterday:parse(d).toLocaleDateString(U.loc,{weekday:'long',day:'numeric',month:'long'})}
+function autoDay(){const l=lastDone();if(!l)return 1;return S.doneOn[l]===iso(new Date())||l===N?l:l+1}
+function statusBox(){
+const l=lastDone(), t=todayN(), U=T[lang];
+if(!S.start)return `<p class='rubric'>${U.pick}</p>`;
+if(t<1&&!l)return `<p class='today'>${U.willStart(dateOf(1))}</p>`;
+if(l===N)return `<p class='today'>${U.completed(S.doneOn[N]?when(S.doneOn[N]):'')}</p>`;
+let h=`<p class='today'>${U.prayToday(day)}</p>`;
+if(S.done.includes(day))h=`<p class='today'>${U.prayedToday(day)}</p>`;
+else if(beads.size)h+=`<p class='rubric'>${U.stopped(beads.size,TX[lang].PETIZ.length)}</p>`;
+else if(l)h+=`<p class='rubric'>${U.lastDay(l,S.doneOn[l]?when(S.doneOn[l]):'')}</p>`;
+return h}
+/* testi fissi fuori da #app (intestazione, piè di pagina, titolo) */
+function paint(){
+const U=T[lang];
+document.documentElement.lang=lang;
+document.title=U.title;
+const m=document.querySelector("meta[name='apple-mobile-web-app-title']");if(m)m.content=U.appTitle;
+document.getElementById('h1').textContent=U.h1;
+document.getElementById('sub').textContent=U.sub;
+document.getElementById('foot').innerHTML=U.foot;
+const bk=document.getElementById('back');bk.textContent=U.back;bk.href='../?lang='+lang;
+document.getElementById('fsMinus').setAttribute('aria-label',U.smaller);
+document.getElementById('fsPlus').setAttribute('aria-label',U.bigger);
+document.getElementById('bES').className=lang==='es'?'on':'';
+document.getElementById('bIT').className=lang==='it'?'on':'';
+document.getElementById('bES').setAttribute('aria-pressed',lang==='es');
+document.getElementById('bIT').setAttribute('aria-pressed',lang==='it');
+}
+function setLang(l){if(l!=='es'&&l!=='it')return;lang=l;try{localStorage.setItem('novenas-lang',l)}catch(e){}try{history.replaceState(null,'','?lang='+l+location.hash)}catch(e){}paint();render()}
+function render(){
+const isDone=S.done.includes(day), U=T[lang], X=TX[lang];
+app.innerHTML=`
+<section class='card'>
+  <div class='label'>${U.path}</div>
+  <div class='row'><label for='start'>${U.start}</label><input type='date' id='start' lang='${U.loc}' value='${S.start}' onchange='setStart(this.value)'>${!S.start?`<button class='link' onclick='setStart("${iso(new Date())}")'>${U.startToday}</button>`:''}</div>
+  ${statusBox()}
+  <div class='progress'><i style='width:${S.done.length/N*100}%'></i></div>
+  <p class='rubric'>${U.daysOf(S.done.length)}${S.start?` <button class='link' onclick='reset()'>${U.restart}</button>`:''}</p>
+</section>
+
+${standalone?'':`<section class='card'>
+  <div class='label'>${U.keepTitle}</div>
+  <p class='rubric'>${U.keepText}</p>
+</section>`}
+
+<section class='card'>
+  <div class='label'>${U.graceTitle}</div>
+  <textarea placeholder='${U.gracePh}' oninput='setInt(this.value)'>${esc(S.intention)}</textarea>
+  <p class='rubric'>${U.graceNote}</p>
+</section>
+
+<section class='card'>
+  <div class='label'>${U.dayOf(day)}</div>
+  <h2>${U.prayer}</h2>
+  <p><span class='v'>✝</span>${U.cross}</p>
+  ${X.INTRO.map(x=>`<p>${x}</p>`).join('')}
+
+  <h3>${U.twelve}</h3>
+  <p class='rubric'>${U.tapBead}</p>
+  <div class='progress'><i id='bar' style='width:${beads.size/X.PETIZ.length*100}%'></i></div>
+  <p class='rubric'><span id='cnt'>${beads.size}</span> ${U.of} ${X.PETIZ.length}</p>
+  ${X.PETIZ.map((x,i)=>`<button class='bead${beads.has(i)?' done':''}' data-n='${i+1}' onclick='tog(${i})'>${x}</button>`).join('')}
+
+  <p style='margin-top:14px'>${X.FINALE}</p>
+  <div class='grace'>${U.graceRubric}<span class='int' id='intShow'>${S.intention.trim()?esc(S.intention.trim()):U.intEmpty}</span></div>
+  <p>${X.PER_CARI}</p>
+  <p><span class='v'>V.</span>${U.vers}<br><span class='v'>R.</span>${U.resp}</p>
+  <h3>${U.oremus}</h3>
+  <p>${X.OREMUS}</p>
+
+  <h3>${U.leo}</h3>
+  ${X.A_TE.split('\n').map(x=>`<p>${x}</p>`).join('')}
+  <p class='rubric'>${U.leoNote}</p>
+
+  <p>${X.PATER}</p>
+  <p>${X.AVE}</p>
+  <p>${X.GLORIA}</p>
+  <p><span class='v'>✝</span>${U.cross}</p>
+  <p class='rubric'>${U.credits}</p>
+  <button class='btn ${isDone?'done':''}' onclick='mark()'>${isDone?U.undo(day):U.markDay(day)}</button>
+</section>`;
+}
+
+document.documentElement.style.setProperty('--fs',S.size+'px');
+open_(autoDay());
+paint();
+render();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&autoDay()!==day){open_(autoDay());render()}});
+/* se il giorno era a metà, porta alla prima supplica non ancora segnata */
+if(beads.size&&!S.done.includes(day)){const b=[...document.querySelectorAll('.bead')].find(x=>!x.classList.contains('done'));b&&setTimeout(()=>b.scrollIntoView({block:'center'}),150)}
+</script>
+</body>
+</html>
