@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang='it'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
+<meta name='theme-color' content='#23365c'>
+<meta name='apple-mobile-web-app-capable' content='yes'>
+<meta name='mobile-web-app-capable' content='yes'>
+<meta name='apple-mobile-web-app-title' content='Novena 54'>
+<title>Novena del Rosario di 54 giorni</title>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap' rel='stylesheet'>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#2a2620;--muted:#7a6f60;--accent:#2c4a7a;--gold:#b0833a;--line:#e6dccb;--soft:#ece6dc;--fs:19px}
+@media (prefers-color-scheme:dark){:root{--bg:#12141a;--card:#1b1e26;--ink:#ece6da;--muted:#a39d92;--accent:#9db8e6;--gold:#d9b06a;--line:#2c3040;--soft:#242a38}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:var(--fs);line-height:1.55;padding-bottom:env(safe-area-inset-bottom)}
+header{background:linear-gradient(160deg,#172440,#23365c 55%,#35507e);color:#f7f1e3;padding:calc(50px + env(safe-area-inset-top)) 20px 18px;text-align:center;position:relative}
+header .cross{font-size:22px;color:#e2c07e;letter-spacing:.3em}
+header h1{font-weight:600;font-size:1.6em;line-height:1.15;margin:6px 0 4px}
+header p{font-style:italic;opacity:.85;font-size:.95em}
+.tools{position:absolute;top:calc(10px + env(safe-area-inset-top));right:10px;left:10px;display:flex;justify-content:space-between;gap:6px}
+.tools div{display:flex;gap:6px}
+.tools button{background:rgba(255,255,255,.14);border:0;color:#fff;font:600 13px Inter,sans-serif;border-radius:8px;padding:6px 9px;cursor:pointer}
+.tools button.on{background:#f7f1e3;color:#23365c}
+.back{display:inline-block;font:500 12px Inter,sans-serif;color:#f7f1e3;opacity:.8;text-decoration:none;margin-bottom:6px}
+main{max-width:640px;margin:0 auto;padding:16px 14px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.label{font:600 11px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+h2{font-size:1.35em;font-weight:600;line-height:1.2;margin-bottom:10px;color:var(--accent)}
+h3{font-size:1.1em;font-weight:600;margin:16px 0 4px}
+p{margin-bottom:10px}
+.v{color:var(--accent);font-weight:700;margin-right:4px}
+.num{color:var(--accent);font-weight:700;margin-right:6px}
+.rubric{font:400 13px/1.5 Inter,sans-serif;color:var(--muted);margin:8px 0}
+.rubric a{color:inherit}
+textarea{width:100%;min-height:70px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px;font:inherit;font-size:.95em;resize:vertical}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font:500 14px Inter,sans-serif}
+.row input[type=date],.row select{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:8px 10px;font:500 14px Inter,sans-serif;max-width:100%}
+.today{font-size:1.15em;margin:12px 0 4px}
+.today b{color:var(--accent)}
+.progress{height:6px;background:var(--soft);border-radius:3px;overflow:hidden;margin:8px 0 6px}
+.progress i{display:block;height:100%;background:var(--gold);width:0;transition:.3s}
+.phase{display:inline-block;font:600 12px Inter,sans-serif;background:var(--soft);color:var(--accent);border-radius:20px;padding:4px 10px;margin-bottom:8px}
+.int{color:var(--gold);font-style:italic}
+.grace{background:var(--soft);border-radius:12px;padding:14px 16px;margin:12px 0;font-style:italic}
+.grace .int{display:block;margin-top:6px;font-style:normal}
+details{margin:6px 0 10px}
+summary{cursor:pointer;font:500 13px Inter,sans-serif;color:var(--accent);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▸ ';}
+details[open] summary::before{content:'▾ '}
+details p{margin-top:8px}
+.dec{border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin:12px 0 22px;transition:.2s;scroll-margin:80px}
+.dec.done{background:var(--soft);border-color:transparent}
+.dec .mys{font-weight:600;font-size:1.08em;line-height:1.3;color:var(--accent)}
+.dec .mys small{display:block;font:600 11px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.aves{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0 6px}
+.aves button{width:100%;height:clamp(48px,13vw,60px);border-radius:30px;border:2px solid var(--gold);background:transparent;color:var(--gold);font:600 17px Inter,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.aves button.on{background:var(--gold);color:var(--card)}
+.dec .st{font:500 12px Inter,sans-serif;color:var(--muted)}
+.btn{display:block;width:100%;padding:15px;border-radius:12px;border:0;background:var(--accent);color:var(--bg);font:600 15px Inter,sans-serif;margin-top:6px;cursor:pointer}
+.btn.done{background:var(--soft);color:var(--accent)}
+.link{background:none;border:0;color:var(--accent);font:600 13px Inter,sans-serif;text-decoration:underline;cursor:pointer;padding:0}
+footer{text-align:center;font:400 12px/1.6 Inter,sans-serif;color:var(--muted);padding:0 20px 30px}
+</style>
+</head>
+<body>
+<header>
+  <div class='tools'>
+    <div><button id='bES' onclick='setLang("es")' aria-label='Español'>ES</button><button id='bIT' onclick='setLang("it")' aria-label='Italiano'>IT</button></div>
+    <div><button id='fsMinus' onclick='fs(-1)' aria-label='Testo più piccolo'>A−</button><button id='fsPlus' onclick='fs(1)' aria-label='Testo più grande'>A+</button></div>
+  </div>
+  <a class='back' id='back' href='../'>← Tutte le novene</a>
+  <div class='cross'>✦ ✝ ✦</div>
+  <h1 id='h1'>Novena del Rosario di 54 giorni</h1>
+  <p id='sub'>Alla Regina del Santo Rosario di Pompei</p>
+</header>
+<main id='app'></main>
+<footer id='foot'></footer>
+<script>
+const FONTE='https://www.piccolifiglidellaluce.it/pfdl/maria-santissima/229-la-madonna-del-rosario-di-pompei/2049-novena-del-rosario-di-54-giorni';
+const FONTE_ES1='https://www.devocionario.com/maria/pompeya_8.html';
+const FONTE_ES2='https://www.devocionario.com/maria/pompeya_9.html';
+const N=54, HALF=27;
+
+/* ================= ITALIANO (testi del beato Bartolo Longo, da FONTE) ================= */
+const IT={
+CATERINA:`O Santa Caterina da Siena, mia Protettrice e Maestra, tu che assisti dal cielo i tuoi devoti che recitano il Rosario di Maria, assistimi in questo momento e degnati di recitare insieme con me la Novena alla Regina del Rosario che ha posto il trono delle sue grazie nella Valle di Pompei, affinché per tua intercessione io ottenga la desiderata grazia. Amen.`,
+DEUS:['O Dio, vieni a salvarmi.','Signore, vieni presto in mio aiuto.'],
+GLORIA:`Gloria al Padre e al Figlio e allo Spirito Santo. Come era nel principio, e ora e sempre, nei secoli dei secoli. Amen.`,
+PATER:`Padre nostro, che sei nei cieli, sia santificato il tuo nome, venga il tuo regno, sia fatta la tua volontà, come in cielo così in terra. Dacci oggi il nostro pane quotidiano, e rimetti a noi i nostri debiti come anche noi li rimettiamo ai nostri debitori, e non abbandonarci alla tentazione, ma liberaci dal male. Amen.`,
+AVE:`Ave, o Maria, piena di grazia, il Signore è con te. Tu sei benedetta fra le donne e benedetto è il frutto del tuo seno, Gesù. Santa Maria, Madre di Dio, prega per noi peccatori, adesso e nell’ora della nostra morte. Amen.`,
+SALVE:`Salve, Regina, Madre di misericordia, vita, dolcezza e speranza nostra, salve. A te ricorriamo, esuli figli di Eva; a te sospiriamo, gementi e piangenti in questa valle di lacrime. Orsù dunque, avvocata nostra, rivolgi a noi gli occhi tuoi misericordiosi. E mostraci, dopo questo esilio, Gesù, il frutto benedetto del tuo seno. O clemente, o pia, o dolce Vergine Maria.`,
+SUP:[
+`O Vergine Immacolata e Regina del Santo Rosario, tu, in questi tempi di morta fede e di empietà trionfante, hai voluto piantare il tuo trono di Regina e di Madre sull’antica terra di Pompei, soggiorno di morti pagani. Da quel luogo dov’erano adorati gl’idoli e i demoni, Tu oggi, come Madre della divina grazia, spargi dappertutto i tesori delle celesti misericordie. Da quel trono dove regni pietosa, rivolgi, o Maria, anche sopra di me gli occhi tuoi benigni, ed abbi pietà di me che ho tanto bisogno del tuo soccorso. Mostrati anche a me, come a tanti altri ti sei mostrata, vera Madre di misericordia: mentre io con tutto il cuore ti saluto e t’invoco mia Sovrana e Regina del Santo Rosario.`,
+`Prostrata ai piedi del tuo trono, o grande e gloriosa Signora, l’anima mia ti venera tra gemiti ed affanni dove è oppressa oltre misura. In queste angustie ed agitazioni in cui mi trovo, io alzo confidente gli occhi a te, che ti sei degnata di eleggere per tua dimora le campagne di poveri ed abbandonati contadini. E là, di fronte alla città ed all’anfiteatro dove regna silenzio e rovina, Tu, come Regina delle Vittorie, levasti la tua voce potente per chiamare da ogni parte d’Italia e del mondo cattolico i devoti tuoi figli ad erigerti un Tempio. Muoviti a pietà di quest’anima mia che giace avvilita nel fango. Pietà di me, o Signora, pietà di me che sono oltremodo ripieno di miserie e di umiliazioni. Tu, che sei lo sterminio dei demoni, difendimi da questi nemici che mi assediano. Tu, che sei l’Aiuto dei cristiani, traimi da queste tribolazioni in cui verso miserevolmente. Tu, che sei la Vita nostra, trionfa sulla morte che minaccia l’anima mia in questi pericoli in cui si trova esposta; ridonami la pace, la tranquillità, l’amore, la salute. Amen.`,
+`Il sentire che tanti sono stati da te beneficati, solo perché sono ricorsi a te con fede, m’infonde coraggio d’invocarti in mio soccorso. Tu già promettesti a S. Domenico che chi vuol grazie, col tuo Rosario le ottiene; ed io, col tuo Rosario in mano, oso ricordarti, o Madre, le tue sante promesse. Anzi tu stessa ai giorni nostri operi continui prodigi per chiamare i tuoi figli a onorarti nel Tempio di Pompei. Tu dunque vuoi tergere le nostre lacrime, vuoi lenire i nostri affanni! Ed io col cuore sulle labbra, con viva fede ti chiamo e t’invoco: Madre mia!… Madre cara!… Madre bella!… Madre dolcissima, aiutami! Madre e Regina del Santo Rosario di Pompei, non tardare più a stendermi la mano tua potente per salvarmi: ché il ritardo, come vedi, mi porterebbe alla rovina.`,
+`E a chi altri mai potrei ricorrere, se non a te che sei il Sollievo dei miserabili, il Conforto degli abbandonati, la Consolazione degli afflitti? Io te lo confesso, l’anima mia è miserabile: gravata da enormi colpe, merita di ardere nell’inferno, indegna di ricevere grazie! Ma non sei tu la Speranza di chi dispera, la Madre di Gesù, unico mediatore tra l’uomo e Dio, la potente nostra Avvocata presso il trono dell’Altissimo, il Rifugio dei peccatori? Basta solo che tu dica una parola in mio favore al tuo Figlio, ed Egli ti esaudirà. Chiedigli, dunque, o Madre, questa grazia di cui ho tanto bisogno.|GRACE|Tu sola puoi ottenermela: Tu che sei l’unica speranza mia, la mia consolazione, la mia dolcezza, tutta la vita mia. Così spero. Amen.`,
+`O Vergine e Regina del santo Rosario, Tu che sei la Figlia del Padre Celeste, la Madre del Figlio divino, la Sposa dello Spirito Santo; Tu che tutto puoi presso la Santissima Trinità, devi impetrarmi questa grazia tanto a me necessaria, purché non sia di ostacolo alla mia salvezza eterna.|GRACE|Te la domando per la tua Immacolata Concezione, per la tua divina Maternità, per i tuoi gaudi, per i tuoi dolori, per i tuoi trionfi. Te la domando per il cuore del tuo amorevole Gesù, per quei nove mesi che lo portasti nel seno, per gli stenti della sua vita, per l’acerba sua passione, per la sua morte in croce, per il Nome suo santissimo, per il suo preziosissimo Sangue. Te la domando infine per il Cuore tuo dolcissimo, nel Nome tuo glorioso, o Maria, che sei Stella del mare, Signora potente, Mare di dolore, Porta del paradiso e Madre di ogni grazia. In te confido, da te tutto spero, tu mi devi salvare. Amen.`
+],
+SUP_END:{v:['Regina del Santo Rosario, prega per noi.','Affinché diventiamo degni delle promesse di Cristo.'],
+ or:`O Dio, il tuo unico Figlio, ci ha acquistato con la sua vita, morte e risurrezione, i beni della salvezza eterna: concedi a noi che, venerando questi misteri nel Santo Rosario della Vergine Maria, imitiamo ciò che contengono e otteniamo ciò che promettono. Per Cristo Nostro Signore. Amen.`},
+RIN:[
+`Eccomi sulle tue ginocchia, o Madre Immacolata di Gesù, che godi di essere invocata Regina del Rosario nella Valle di Pompei. Con la gioia nel cuore, con l’animo compreso dalla più viva gratitudine io ritorno a te, mia generosa Benefattrice, mia dolce Signora, Sovrana del mio cuore, a te, che ti sei mostrata veramente la Madre mia, la Madre che assai mi ama. Nei miei gemiti Tu mi hai ascoltato, nelle mie afflizioni mi hai consolato, nelle mie angustie mi hai ridonato la pace. Dolori e pene di morte assediarono il mio cuore, e Tu, o Madre, dal tuo trono di Pompei, con uno sguardo pietoso mi hai rasserenato. Chi mai si volse a te con fiducia e non venne esaudito? Se tutto il mondo conoscesse quanto sei buona, quanto compassionevole con chi soffre, tutte le creature farebbero a te ricorso. Sii Tu sempre benedetta, o Vergine Sovrana di Pompei, da me e da tutti, dagli uomini e dagli Angeli, dalla terra e dal Cielo. Amen.`,
+`Grazie io rendo a Dio e grazie a te, Madre divina, dei nuovi benefici che per la pietà e misericordia tua mi sono stati elargiti. Che sarebbe stato di me, se Tu avessi respinto i miei sospiri, le lacrime mie? Per me ti ringrazino gli Angeli del paradiso e i cori degli Apostoli, dei Martiri, delle Vergini, dei Confessori. Per me ti ringrazino tante anime di peccatori da te salvate, che ora godono in cielo la visione della tua immortale bellezza. Vorrei che insieme con me tutte le creature ti amassero, e che il mondo tutto ripetesse l’eco dei miei ringraziamenti. Che potrò io rendere a te, o Regina, ricca di pietà e di magnificenza? La vita che mi resta la consacro a te, ed a propagare ovunque il tuo culto, o Vergine del Rosario di Pompei, alla cui invocazione la grazia del Signore mi ha visitato. Promuoverò la devozione del tuo Rosario; narrerò a tutti la misericordia che m’impetrasti; predicherò sempre quanto fosti buona con me, affinché anche gl’indegni come me, e i peccatori a te si rivolgano con fiducia.`,
+`Con quali nomi ti chiamerò io, o candida colomba di pace? Con quali titoli t’invocherò, che i santi Dottori ti chiamarono Signora del creato, Porta della vita, Tempio di Dio, Reggia di luce, Gloria dei cieli, Santa tra i Santi, Miracolo dei miracoli, Paradiso dell’Altissimo? Tu sei la Tesoriera delle grazie, la Onnipotenza supplichevole, anzi la stessa Misericordia di Dio che discende sugli infelici. Ma so pure che è dolce al tuo cuore l’essere invocata Regina del Rosario nella Valle di Pompei. E così chiamandoti, sento la dolcezza del tuo mistico Nome, o Rosa del Paradiso, trapiantata nella Valle del pianto per addolcire gli affanni di noi esuli figli di Eva; Rosa rubiconda di carità, più fragrante di tutti gli aromi del Libano, che, col tuo profumo di soavità celestiale, attiri nella tua Valle il cuore dei peccatori al Cuore di Dio. Tu sei la Rosa di eterna freschezza, che, innaffiata dai rivoli delle acque celesti, gettasti le tue radici sulla terra inaridita da una pioggia di fuoco; Rosa d’intemerata bellezza, che nel luogo della desolazione piantasti l’Orto delle delizie del Signore. Esaltato sia Dio, che rese il Nome tuo così ammirabile. Benedite, o popoli, il Nome della Vergine di Pompei, poiché tutta la terra è piena della sua misericordia.`,
+`Tra le tempeste che mi avevano sommerso levai gli occhi miei a te, nuova Stella di speranza apparsa ai giorni nostri sulla Valle delle rovine. Dal profondo delle amarezze alzai la mia voce a te, Regina del Rosario di Pompei, e sperimentai la potenza di questo titolo a te sì caro. Salve, io griderò sempre, salve, o Madre di pietà, mare immenso di grazie, oceano di bontà e di compassione! Le glorie del tuo Rosario, le vittorie della tua Corona, chi canterà degnamente? Tu al mondo, che si svincola dalle braccia di Gesù, per darsi a quelle di Satana, appresti salute in quella Valle dove Satana divorava le anime. Tu calcasti, trionfatrice, i ruderi dei templi pagani, e sulle rovine della idolatria ponesti lo sgabello della tua dominazione. Tu mutasti una plaga di morte in Valle di risurrezione e di vita, e sulla terra dominata dal tuo nemico piantasti la Città del rifugio, dove accogli i popoli per salvarli. Ecco i figli tuoi, sparsi nel mondo, qui t’innalzarono un trono, a testimonianza dei tuoi prodigi, come trofeo delle tue misericordie. Tu da quel Trono chiamasti anche me tra i figli della tua predilezione: su di me peccatore si posò lo sguardo della tua misericordia. Siano benedette in eterno le opere tue, o Signora; e benedetti siano i prodigi tutti da te operati nella Valle della desolazione e dello sterminio.`,
+`Risuoni su ogni lingua la gloria tua, o Signora, e la sera tramandi al giorno seguente il coro delle nostre benedizioni. Tutte le genti ti chiamino beata, e beata ripetano tutti i lidi della terra e i cori celesti. Tre volte beata anche io ti chiamerò con gli Angeli, con gli Arcangeli, con i Principati; tre volte beata con le angeliche Potestà, con le Virtù dei cieli, con le Dominazioni supreme. Beatissima ti predicherò con i Troni, con i Cherubini e con i Serafini. O sovrana mia salvatrice, piega i tuoi occhi misericordiosi su questa famiglia, su questa nazione, su tutta la Chiesa. Soprattutto non mi negare la più grande delle grazie: cioè che la mia fragilità da te non mi distacchi mai. In quella fede e in quell’amore dove arde in questo istante l’anima mia, fa’ che io perseveri sino all’ultimo respiro. E, quanti concorriamo al decoro del tuo Santuario di Pompei e all’incremento delle sue opere di carità, fa’ che siamo tutti nel numero degli eletti.|KISS|O corona del Rosario della Madre mia, ti stringo al petto e ti bacio con venerazione.|KISSR|Tu sei la via per raggiungere ogni virtù, il tesoro dei meriti per il paradiso, il pegno della mia predestinazione, la catena forte che stringe il nemico, sorgente di pace a chi ti onora in vita, auspicio di vittoria a chi ti bacia in morte. In quell’ora estrema io ti aspetto, o Madre. Il tuo apparire sarà il segnale della mia salvezza; il tuo Rosario mi aprirà le porte del Cielo. Amen.`
+],
+RIN_END:{v:['Regina del Santo Rosario, prega per noi.','Affinché diventiamo degni delle promesse di Cristo.'],
+ or:`Dio e Padre del Signore nostro Gesù Cristo, che ci hai insegnato di ricorrere a te con fiducia e chiamarti: Padre nostro che sei nei cieli; Signore buono, che sei sempre misericordioso e perdoni, per intercessione della Immacolata Vergine Maria, esaudisci noi, che ci gloriamo del titolo di figli del Rosario; gradisci le nostre umili grazie per i doni ricevuti; e il Trono che le innalzasti nel Santuario di Pompei rendi ogni giorno più glorioso e perenne, per i meriti di Gesù Cristo Nostro Signore. Amen.`},
+MYS:{
+ g:['Misteri gaudiosi',['L’annunciazione dell’angelo a Maria','La visita di Maria a santa Elisabetta','La nascita di Gesù a Betlemme','La presentazione di Gesù al tempio','Il ritrovamento di Gesù nel tempio']],
+ l:['Misteri luminosi',['Il battesimo di Gesù al Giordano','Le nozze di Cana','L’annuncio del Regno di Dio e l’invito alla conversione','La trasfigurazione','L’istituzione dell’Eucaristia']],
+ d:['Misteri dolorosi',['L’agonia di Gesù nell’orto','La flagellazione di Gesù','La coronazione di spine','Gesù sale al Calvario portando la croce','La crocifissione e morte di Gesù']],
+ gl:['Misteri gloriosi',['La risurrezione di Gesù','L’ascensione di Gesù al cielo','La discesa dello Spirito Santo','L’assunzione di Maria al cielo','L’incoronazione di Maria regina del cielo e della terra']]
+}
+};
+
+/* ================= ESPAÑOL (versión española de los textos del beato Bartolo Longo) ================= */
+const ES={
+CATERINA:`¡Oh Santa Catalina de Siena, mi protectora y maestra! Tú que proteges a tus devotos cuando rezan el Rosario de María, asísteme en este instante, y dígnate rezar conmigo la Novena en honor de la Reina del Rosario, que ha colocado el trono de sus favores en el Valle de Pompeya, para que por tu intercesión obtenga yo la gracia que deseo. Así sea.`,
+DEUS:['Dios, venid en mi ayuda.','Señor, apresuraos a socorrerme.'],
+GLORIA:`Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.`,
+PATER:`Padre nuestro, que estás en el cielo, santificado sea tu Nombre; venga a nosotros tu reino; hágase tu voluntad en la tierra como en el cielo. Danos hoy nuestro pan de cada día; perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden; no nos dejes caer en la tentación, y líbranos del mal. Amén.`,
+AVE:`Dios te salve, María, llena eres de gracia, el Señor es contigo. Bendita tú eres entre todas las mujeres, y bendito es el fruto de tu vientre, Jesús. Santa María, Madre de Dios, ruega por nosotros, pecadores, ahora y en la hora de nuestra muerte. Amén.`,
+SALVE:`Dios te salve, Reina y Madre de misericordia, vida, dulzura y esperanza nuestra; Dios te salve. A ti llamamos los desterrados hijos de Eva; a ti suspiramos, gimiendo y llorando en este valle de lágrimas. Ea, pues, Señora, abogada nuestra, vuelve a nosotros esos tus ojos misericordiosos; y después de este destierro muéstranos a Jesús, fruto bendito de tu vientre. ¡Oh clementísima, oh piadosa, oh dulce siempre Virgen María!`,
+SUP:[
+`¡Oh Virgen Inmaculada y Reina del Santo Rosario! En estos tiempos en que, apagada la fe en las almas, domina la impiedad, has querido levantar tu trono de Reina y Madre sobre la antigua Pompeya, morada de muertos paganos, y desde aquel lugar, donde eran adorados los ídolos y demonios, Tú hoy, cual Madre de la divina gracia, derramas por doquiera los tesoros de las celestiales misericordias; ¡ah!, desde aquel trono donde reinas vuelve también a mí, oh María, esos tus ojos benignos, y ten piedad de mí, que tanto necesito de tu socorro. Muéstrate también conmigo cual te mostraste con tantos otros, verdadera Madre de misericordia, «Monstra te esse Matrem», mientras de todo corazón te saludo e invoco por mi Soberana y por Reina del Santísimo Rosario.`,
+`Mi alma rendida al pie de tu trono, oh grande y gloriosa Señora, te venera entre los gemidos y angustias que sobremanera la oprimen. En medio de las penas y agitaciones en que me hallo, levanto confiado los ojos hacia Ti, que te dignaste elegir para tu morada las campiñas de pobres y desamparados labriegos; y que frente a la ciudad y anfiteatro de deleites paganos, en donde reinan el silencio y las ruinas, cual Señora de las Victorias elevaste tu poderosa voz llamando de todas partes de Italia y del mundo católico a tus devotos hijos para que te levantasen un templo. ¡Oh, apiádate finalmente de esta alma que yace aletargada bajo el polvo y las sombras de la muerte! Ten piedad de mí, ¡oh Señora!; ten piedad de mí, que me hallo abrumado de miserias y humillaciones. Tú que eres exterminio de los demonios, defiéndeme de los enemigos que me asedian. Tú que eres el Auxilio de los cristianos, sácame de las tribulaciones en que me hallo sumido. Tú que eres nuestra vida, triunfa de la muerte que amenaza mi alma en los peligros a que se halla expuesta. Devuélveme la paz, la tranquilidad, el amor, la salud. Así sea.`,
+`¡Ay!… el oír que tantos han sido colmados de favores sólo porque a Ti acudieron con fe, me infunde nuevo aliento y valor para llamarte en mi socorro. Tú prometiste a Santo Domingo que el que deseara gracias las obtendría con tu Rosario; y yo, con el Rosario en la mano, te llamo, oh Madre, al cumplimiento de tus maternales promesas. Aún más: Tú misma, oh Madre, has obrado continuos prodigios para excitar a tus hijos a que te levantaran un templo en Pompeya. Tú, pues, quieres enjugar nuestras lágrimas y aliviar nuestros afanes; y yo, con el corazón en los labios, con fe viva te llamo e invoco: ¡Madre mía! ¡Madre querida! ¡Madre bella!… ¡Madre dulcísima, ayúdame! Madre y Reina del Santo Rosario, no tardes más en tender hacia mí tu poderosa mano y salvarme; porque la tardanza, como ves, me llevaría a la ruina.`,
+`¿Y a quién he de acudir yo sino a Ti, que eres el alivio de los miserables, el refugio de los desamparados, el consuelo de los afligidos? ¡Ah, sí, lo confieso: abrumada miserablemente mi alma bajo el enorme peso de las culpas, no merece más que el infierno y es indigna de recibir tus favores! Mas, ¿no eres Tú la esperanza de quien desespera, la poderosa Medianera entre Dios y el hombre, la Abogada ante el trono del Altísimo, el Refugio de los pecadores? ¡Ah, basta que digas una sola palabra en mi favor a tu divino Hijo, para que Él te escuche! Pídele, pues, oh Madre, la gracia que tanto necesito…|GRACE|Sólo Tú puedes obtenérmela. Tú que eres mi única esperanza, mi consuelo, mi alegría, mi vida. Así lo espero, así sea.`,
+`¡Oh Virgen y Reina del Santo Rosario! Tú que eres la Hija del Padre celestial, la Madre del Hijo divino, la Esposa del Espíritu Santo; Tú que todo lo puedes ante la Trinidad Santísima, debes obtenerme esta gracia para mí tan necesaria, a no ser que sea de obstáculo para mi eterna salvación…|GRACE|Te la pido por tu Concepción Inmaculada, por tu divina Maternidad, por tus gozos, por tus dolores, por tus triunfos. Te la pido por el Corazón de tu amoroso Jesús, por aquellos nueve meses que lo llevaste en tu seno, por los trabajos y sinsabores de su vida, por su acerba Pasión y Muerte de Cruz, por su santísimo Nombre y por su sangre preciosísima. Te la pido, finalmente, por tu dulcísimo Corazón, por tu glorioso Nombre, ¡oh María!, que eres Estrella del mar, Señora poderosísima, Puerta del paraíso y Madre de todas las gracias. En Ti confío…, todo lo espero de Ti: Tú me has de salvar. Así sea.`
+],
+SUP_END:{pre:[['Hazme digno de alabarte, oh Virgen Sagrada.','Dame fortaleza contra tus enemigos.']],
+ v:['Ruega por nosotros, Reina del Santísimo Rosario.','Para que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo.'],
+ or:`Oh Dios, cuyo Hijo Unigénito con su vida, muerte y resurrección nos adquirió el premio de la salvación eterna, concédenos, te suplicamos, que meditando estos misterios en el Santísimo Rosario de la bienaventurada Virgen María, imitemos las virtudes que contienen y alcancemos los bienes que prometen. Por el mismo Jesucristo Nuestro Señor. Así sea.`},
+RIN:[
+`Heme aquí a tus plantas, ¡oh Madre Inmaculada de Jesús!, que gozas al ser llamada Reina del Rosario del Valle de Pompeya. Con regocijo de mi corazón, y con el ánimo henchido de la más viva gratitud, vuelvo a Ti, mi generosa Bienhechora, mi dulce Señora, Soberana de mi corazón, pues te has mostrado como verdadera Madre mía, Madre que inmensamente me ama. Yo te supliqué, con gemidos y lágrimas, y Tú me consolaste; yo me hallaba en duros aprietos, y Tú me devolviste la paz. Dolores y congojas mortales oprimían mi corazón, y Tú, oh Madre, desde tu trono de Pompeya con una piadosa mirada me tranquilizaste. ¡Ah!, ¿quién se dirigió a Ti con confianza y no fue escuchado? ¡Oh, si todo el mundo conociera cuán buena y compasiva eres con quien sufre, todas las criaturas acudirían a Ti! Seas, pues, para siempre bendita, oh Virgen soberana de Pompeya; bendita para siempre de mí y de todos, de los hombres y de los ángeles, en la tierra y en el cielo. Así sea.`,
+`Doy gracias a Dios y a Ti, Madre mía, por los nuevos beneficios que por tu piedad y misericordia me han sido concedidos. ¿Qué hubiera sido de mí si Tú hubieras rechazado mis suspiros y lágrimas? Por mí te tributen gracias los ángeles del Paraíso, y los coros de los apóstoles, de los mártires, de las vírgenes y de los confesores; por mí te den gracias también tantos pecadores por Ti salvados, que ahora gozan en el cielo de la visión de tu inmortal belleza. ¡Ojalá conmigo te amaran las criaturas todas, y el mundo entero se hiciera eco de mis agradecimientos! Por tantos favores recibidos, ¿qué podría yo devolverte, oh Reina, llena de piedad y magnificencia? La vida que me queda yo la consagro a Ti, para propagar por doquiera tu culto, oh Virgen del Rosario de Pompeya, por cuya merced el Señor me visitó con su gracia. Promoveré la devoción de tu Rosario, narraré a todos la misericordia que me alcanzaste, predicaré siempre lo buena que fuiste conmigo para que los indignos y pecadores, como yo, acudan a Ti con confianza.`,
+`¿Con qué nombres te saludaré, candorosa paloma de paz? ¿Con qué título te invocaré, cuando los doctores te llamaron «Señora de lo criado, Puerta de la vida, Templo de Dios, Alcázar de luz, Gloria de los cielos, Santa entre los santos, Paraíso del Altísimo»? Tú eres la tesorera de las gracias, la omnipotencia suplicante; diré más, la misericordia de Dios, que se derrama abundantemente sobre los desdichados. Pero sé también que es dulce a tu corazón el ser llamada Reina del Rosario del Valle de Pompeya; y llamándote así, siento la dulzura de tu místico nombre, ¡oh Rosa del Paraíso, trasplantada al Valle de lágrimas para suavizar las penas de los tristes desterrados hijos de Eva! Tú eres la rubicunda Rosa de caridad, más fragante que todos los aromas del Líbano, que en tu valle con perfume de celestial suavidad elevas los corazones de los pecadores a Dios. Tú la Rosa de eterna frescura que, regada por las aguas celestiales, echaste raíces en un terreno asolado por una lluvia de fuego. Tú la Rosa de inmaculada belleza que del sitio de desolación hiciste jardín ameno de las delicias del Señor. ¡Ensalzado sea Dios, que ha hecho tan admirable tu nombre! ¡Bendecid, pueblos, el nombre de la Virgen de Pompeya, pues rebosa la tierra de su misericordia!`,
+`Sumergido por la tempestad, desde el fondo del abismo levanté mis ojos a Ti, ¡oh nueva estrella de esperanza, aparecida en nuestros días sobre el Valle de las ruinas! Desde la más intensa amargura, levanté mi voz a Ti, Reina del Rosario de Pompeya, y experimenté el poder de este título, de Ti tan querido. ¡Dios te salve, clamaré siempre, salve, oh Madre de Piedad, mar inmenso de gracias, océano de bondad y compasión! Las nuevas glorias de tu Rosario, las recientes victorias de tu corona, ¿quién dignamente podrá cantarlas? Al mundo insensato que se arranca de los brazos de Jesús para entregarse en los de Luzbel, Tú le proporcionaste la salvación en aquel mismo Valle, donde Satanás devoraba a las almas. Tú hollaste triunfadora las ruinas de los templos paganos, y sobre sus escombros asentaste la grada de tu excelso trono. Tú trocaste las playas de muerte en Valle de resurrección y de vida, y sobre la tierra que dominaba tu enemigo, edificaste la ciudadela de refugio, adonde se acogen los pueblos para hallar su amparo y salud. Allí tus hijos, dispersos por el mundo, te levantaron un trono, como monumento de tus portentos y trofeo de tus misericordias. Desde aquel Trono me llamaste a mí también para admitirme entre los hijos de tu predilección; sobre mí, pobrecillo, se detuvo la mirada de tu clemencia. ¡Benditas sean por eternidad de eternidades tus obras, oh Señora; y benditos para siempre todos los prodigios que obraste en el Valle del exterminio y de la desolación!`,
+`Todas las lenguas ensalcen tus glorias, ¡oh Señora!, y el tenue crepúsculo vespertino transmita a la clara aurora los dulces acordes de nuestras bendiciones. Todas las gentes te llamen venturosa, y venturosa repitan las riberas del mar y la inmensidad de los cielos. Tres veces bienaventurada te llamaré con los Ángeles, Arcángeles y Principados; tres veces bienaventurada con las Potestades angelicales, con las Virtudes de los cielos, con las Dominaciones soberanas. Dichosísima te pregonaré con los Tronos, los Querubines y los Serafines. ¡Oh Soberana y Salvadora mía! No dejes de fijar tu mirada compasiva sobre mi familia, mi Patria y toda la Iglesia. Particularmente te suplico no me niegues la mayor de las gracias, esto es, la de que mi fragilidad no me aparte nunca jamás de Ti. Haz, en fin, que todos los que cooperamos a la grandeza de tu Santuario de Pompeya seamos del número de los escogidos.|KISS|¡Oh Santo Rosario de mi Madre, te estrecho contra mi pecho y con reverencia te beso!|KISSR|Tú eres vía para llegar a todas las virtudes; tesoro de méritos para el paraíso; prenda de predestinación; inquebrantable cadena que sujeta al enemigo; manantial de paz para los que te honran en vida, augurio de la victoria para los que te besan en la hora de la muerte. En aquella hora postrera yo te espero, oh Madre mía; tu presencia será la señal de mi salvación, y tu Rosario me franqueará las puertas del cielo. Así sea.`
+],
+RIN_END:{v:['Ruega por nosotros, Reina del Santísimo Rosario.','Para que seamos dignos de alcanzar las promesas de Nuestro Señor Jesucristo.'],
+ or:`¡Oh Dios y Padre de Nuestro Señor Jesucristo!, que nos habéis enseñado a acudir a Vos con confianza y llamaros Padre nuestro que estás en los cielos; ¡ah!, bondadoso Señor, de quien es propio el usar siempre de misericordia y perdonar, por la intercesión de la Virgen Inmaculada, oíd propicio a los que nos gloriamos del título de hijos del Rosario; mirad con agrado nuestro humilde tributo de acción de gracias por los dones recibidos; y el trono que levantasteis en el Santuario de Pompeya, volvedlo cada día más glorioso e imperecedero; por los merecimientos de Nuestro Señor Jesucristo. Así sea.`},
+MYS:{
+ g:['Misterios gozosos',['La Encarnación del Hijo de Dios','La Visitación de Nuestra Señora a su prima santa Isabel','El Nacimiento del Hijo de Dios en Belén','La Presentación de Jesús en el Templo','El Niño Jesús perdido y hallado en el Templo']],
+ l:['Misterios luminosos',['El Bautismo de Jesús en el Jordán','La autorrevelación de Jesús en las bodas de Caná','El anuncio del Reino de Dios invitando a la conversión','La Transfiguración del Señor','La institución de la Eucaristía']],
+ d:['Misterios dolorosos',['La Oración de Jesús en el Huerto','La Flagelación del Señor','La Coronación de espinas','Jesús con la Cruz a cuestas camino del Calvario','La Crucifixión y Muerte de Jesús']],
+ gl:['Misterios gloriosos',['La Resurrección del Hijo de Dios','La Ascensión del Señor a los Cielos','La Venida del Espíritu Santo','La Asunción de Nuestra Señora a los Cielos','La Coronación de María como Reina de cielos y tierra']]
+}
+};
+const TX={it:IT,es:ES};
+const ROMAN=['I','II','III','IV','V'];
+
+/* ================= testi dell’interfaccia ================= */
+const T={
+it:{
+  loc:'it-IT', title:'Novena del Rosario di 54 giorni', appTitle:'Novena 54', h1:'Novena del Rosario di 54 giorni', sub:'Alla Regina del Santo Rosario di Pompei',
+  back:'← Tutte le novene', smaller:'Testo più piccolo', bigger:'Testo più grande',
+  foot:`Testi del beato Bartolo Longo.<br>27 giorni di supplica (tre novene) e 27 di ringraziamento (tre novene), recitando ogni giorno il Rosario.<br>«Recita tre novene e otterrai tutto» — parole della Vergine a Fortuna Agrelli, Napoli 1884.`,
+  today:'oggi', yesterday:'ieri',
+  pick:`Scegli il giorno in cui inizi. Poi la pagina avanza da sola, un giorno alla volta, man mano che segni i giorni pregati. Se chiudi a metà, riapre esattamente dove ti eri fermato.`,
+  willStart:d=>`Inizierai <b>${d}</b>.`,
+  completed:w=>`Hai completato i 54 giorni${w?`, ${w}`:''}. Regina del Santo Rosario, prega per noi.`,
+  prayToday:n=>`Oggi preghi il <b>giorno ${n} di ${N}</b>.`,
+  prayedToday:n=>`Giorno ${n} pregato oggi. Domani continui con il <b>giorno ${n+1}</b>.`,
+  stopped:(d,a)=>`Ti eri fermato qui: ${d===0&&a===0?'prima del Rosario':`decina ${d+1}, ${a} Ave su 10`}.`,
+  stoppedStart:'Ti eri fermato all’inizio della preghiera di oggi.',
+  lastDay:(l,w)=>`Ultimo giorno pregato: il ${l}${w?`, ${w}`:''}.`,
+  path:'Il mio cammino', start:'Inizio', startToday:'Inizio oggi',
+  daysOf:c=>`${c===1?'1 giorno':c+' giorni'} su ${N} pregati.`, restart:'Ricomincia',
+  confirm:'Ricominciare la novena di 54 giorni? Si cancellano data di inizio e giorni segnati (l’intenzione resta).',
+  mysMode:'Misteri', modeWeek:'Secondo il giorno della settimana', modeTrad:'A turno: gaudiosi, dolorosi, gloriosi',
+  modeNote:'«Secondo il giorno»: lunedì e sabato gaudiosi, martedì e venerdì dolorosi, mercoledì e domenica gloriosi, giovedì luminosi. «A turno» è l’uso tradizionale della novena: giorno 1 gaudiosi, giorno 2 dolorosi, giorno 3 gloriosi, e così via.',
+  keepTitle:'Per non perdere il punto',
+  keepText:'Il cammino è salvato su questo telefono, anche la decina e l’Ave a cui eri arrivato. Per conservarlo al sicuro aggiungi la pagina alla schermata Home (Condividi → Aggiungi alla schermata Home) e aprila sempre da lì. Non cancellare i dati del browser durante la novena.',
+  graceTitle:'La grazia che chiedo', gracePh:'Scrivi qui la grazia che chiedi alla Madonna di Pompei…',
+  graceNote:'Resta salvata solo su questo dispositivo e compare nei punti della supplica in cui va presentata.', intEmpty:'[la grazia che chiedi]',
+  dayOf:n=>`Giorno ${n} di ${N}`,
+  phaseSup:k=>`Novena di supplica · ${k}ª di 3`, phaseRin:k=>`Novena di ringraziamento · ${k}ª di 3`,
+  titleSup:'Novena di supplica', titleRin:'Novena di ringraziamento',
+  rinStart:'Oggi inizia la novena di ringraziamento: si continua anche se la grazia non è ancora arrivata.',
+  prep:'Si ponga l’immagine della Madonna in luogo distinto e, potendolo, si accendano due candele, simbolo della fede che arde nel cuore del credente. Quindi si prenda fra le mani la corona del Rosario.',
+  caterinaT:'Preghiera a Santa Caterina da Siena', caterinaR:'Prima di cominciare, si prega Santa Caterina da Siena che si degni di recitare la novena insieme a noi.',
+  todayMys:(m,why)=>`Oggi: <b>${m}</b> <span class='rubric'>(${why})</span>`, whyWeek:w=>w, whyTrad:'a turno',
+  graceAsk:'Si domandi la grazia che si vuole.', graceRepeat:'Si ripeta la grazia che si desidera.',
+  kiss:'Qui si bacia la propria corona.',
+  salveShort:'Salve, Regina…', gloriaShort:'Gloria al Padre…',
+  decLabel:(i,n)=>`${i+1}º mistero ${n}`, decRub:'Padre nostro · 10 Ave Maria · Gloria. Tocca un pallino per ogni Ave.',
+  decDone:'Decina completata', decLeft:c=>`${c} di 10`,
+  mysAdj:{g:'gaudioso',l:'luminoso',d:'doloroso',gl:'glorioso'},
+  prayers:'Le preghiere del Rosario', pater:'Padre nostro', ave:'Ave Maria', gloria:'Gloria', salve:'Salve Regina',
+  final:'Conclusione', oremus:'Preghiamo',
+  credits:`Testo italiano da <a href='${FONTE}' target='_blank' rel='noopener'>Piccoli Figli della Luce</a> (fonte: nostrasignoradelrosario.altervista.org). I titoli dei misteri e il testo delle preghiere comuni sono un’aggiunta di questa pagina.`,
+  undo:n=>`✓ Giorno ${n} pregato · tocca per annullare`, markDay:n=>`Segna il giorno ${n} come pregato`,
+  cutLbl:'Il giorno cambia', cutOpt:h=>h===0?'a mezzanotte':`alle ${h}:00`,
+  cutNote:h=>h===0?'Misteri e giorno della novena cambiano a mezzanotte.':`Misteri e giorno della novena cambiano alle ${h} del mattino: se preghi tardi, prima di dormire, conta ancora come oggi.`,
+  wd:['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato']
+},
+es:{
+  loc:'es-ES', title:'Novena del Rosario de 54 días', appTitle:'Novena 54', h1:'Novena del Rosario de 54 días', sub:'A la Reina del Santo Rosario de Pompeya',
+  back:'← Todas las novenas', smaller:'Texto más pequeño', bigger:'Texto más grande',
+  foot:`Textos del beato Bartolo Longo.<br>27 días de petición (tres novenas) y 27 de acción de gracias (tres novenas), rezando cada día el Rosario.<br>«Haz tres novenas y lo obtendrás todo» — palabras de la Virgen a Fortuna Agrelli, Nápoles 1884.`,
+  today:'hoy', yesterday:'ayer',
+  pick:`Elige el día en que empiezas. Después la página avanza sola, un día cada vez, a medida que marcas los días rezados. Si la cierras a medias, se vuelve a abrir justo donde te quedaste.`,
+  willStart:d=>`Empezarás el <b>${d}</b>.`,
+  completed:w=>`Has completado los 54 días${w?(w==='hoy'||w==='ayer'?` ${w}`:` el ${w}`):''}. Reina del Santo Rosario, ruega por nosotros.`,
+  prayToday:n=>`Hoy rezas el <b>día ${n} de ${N}</b>.`,
+  prayedToday:n=>`Día ${n} rezado hoy. Mañana sigues con el <b>día ${n+1}</b>.`,
+  stopped:(d,a)=>`Te habías quedado aquí: ${d===0&&a===0?'antes del Rosario':`decena ${d+1}, ${a} avemarías de 10`}.`,
+  stoppedStart:'Te habías quedado al principio de la oración de hoy.',
+  lastDay:(l,w)=>`Último día rezado: el ${l}${w?` (${w})`:''}.`,
+  path:'Mi camino', start:'Inicio', startToday:'Empiezo hoy',
+  daysOf:c=>`${c===1?'1 día':c+' días'} de ${N} rezados.`, restart:'Empezar de nuevo',
+  confirm:'¿Empezar de nuevo la novena de 54 días? Se borran la fecha de inicio y los días marcados (la intención se conserva).',
+  mysMode:'Misterios', modeWeek:'Según el día de la semana', modeTrad:'Por turno: gozosos, dolorosos, gloriosos',
+  modeNote:'«Según el día»: lunes y sábado gozosos, martes y viernes dolorosos, miércoles y domingo gloriosos, jueves luminosos. «Por turno» es el uso tradicional de la novena: día 1 gozosos, día 2 dolorosos, día 3 gloriosos, y así sucesivamente.',
+  keepTitle:'Para no perder el hilo',
+  keepText:'El camino se guarda en este teléfono, también la decena y el avemaría a los que llegaste. Para conservarlo a salvo, añade la página a la pantalla de inicio (Compartir → Añadir a pantalla de inicio) y ábrela siempre desde ahí. No borres los datos del navegador durante la novena.',
+  graceTitle:'La gracia que pido', gracePh:'Escribe aquí la gracia que pides a la Virgen de Pompeya…',
+  graceNote:'Se guarda solo en este dispositivo y aparece en los puntos de la súplica en que se presenta.', intEmpty:'[la gracia que pides]',
+  dayOf:n=>`Día ${n} de ${N}`,
+  phaseSup:k=>`Novena de petición · ${k}.ª de 3`, phaseRin:k=>`Novena de acción de gracias · ${k}.ª de 3`,
+  titleSup:'Novena de petición', titleRin:'Novena de acción de gracias',
+  rinStart:'Hoy empieza la novena de acción de gracias: se continúa aunque la gracia todavía no haya llegado.',
+  prep:'Se pone la imagen de la Virgen en un lugar destacado y, si se puede, se encienden dos velas, símbolo de la fe que arde en el corazón del creyente. Después se toma en las manos el rosario.',
+  caterinaT:'Oración a Santa Catalina de Siena', caterinaR:'Antes de empezar, se pide a Santa Catalina de Siena que se digne rezar la novena con nosotros.',
+  todayMys:(m,why)=>`Hoy: <b>${m}</b> <span class='rubric'>(${why})</span>`, whyWeek:w=>w, whyTrad:'por turno',
+  graceAsk:'Se pide la gracia que se desea.', graceRepeat:'Aquí se especifica la gracia que se desea.',
+  kiss:'Aquí besa cada uno su rosario.',
+  salveShort:'Dios te salve, Reina y Madre de misericordia…', gloriaShort:'Gloria al Padre…',
+  decLabel:(i,n)=>`${i+1}.º misterio ${n}`, decRub:'Padrenuestro · 10 avemarías · Gloria. Toca un círculo por cada avemaría.',
+  decDone:'Decena completada', decLeft:c=>`${c} de 10`,
+  mysAdj:{g:'gozoso',l:'luminoso',d:'doloroso',gl:'glorioso'},
+  prayers:'Las oraciones del Rosario', pater:'Padrenuestro', ave:'Avemaría', gloria:'Gloria', salve:'Salve',
+  final:'Conclusión', oremus:'Oración',
+  credits:`Versión española de los textos del beato Bartolo Longo publicada en Devocionario Católico: <a href='${FONTE_ES1}' target='_blank' rel='noopener'>novena de petición</a> y <a href='${FONTE_ES2}' target='_blank' rel='noopener'>novena de acción de gracias</a>. Los títulos de los misterios y el texto de las oraciones comunes son un añadido de esta página.`,
+  undo:n=>`✓ Día ${n} rezado · toca para deshacer`, markDay:n=>`Marcar el día ${n} como rezado`,
+  cutLbl:'El día cambia', cutOpt:h=>h===0?'a medianoche':(h===1?'a la 1:00':`a las ${h}:00`),
+  cutNote:h=>h===0?'Los misterios y el día de la novena cambian a medianoche.':`Los misterios y el día de la novena cambian a ${h===1?'la 1':'las '+h} de la madrugada: si rezas tarde, antes de dormir, cuenta todavía como hoy.`,
+  wd:['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
+}
+};
+
+/* ---------- lingua: ?lang= → novenas-lang (condivisa nel sito) → lingua del browser ---------- */
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+const qLang=new URLSearchParams(location.search).get('lang');
+const sLang=lsGet('novenas-lang');
+let lang=(qLang==='es'||qLang==='it')?qLang:(sLang==='es'||sLang==='it')?sLang:((navigator.language||'').toLowerCase().startsWith('it')?'it':'es');
+
+/* ---------- stato (salvato solo nel browser) ----------
+   beads[giorno] = [Ave contate nella decina 1..5]  → così si riprende dalla decina e dall’Ave giuste */
+const KEY='novena-54-pompei';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const S=Object.assign({start:'',done:[],doneOn:{},beads:{},cur:0,intention:'',size:19,mode:'week',cut:4},load());
+let day=1, aves=[0,0,0,0,0];
+const app=document.getElementById('app');
+
+/* giorno di preghiera: cambia all’ora scelta (di serie le 4), non a mezzanotte */
+function pnow(){const d=new Date();d.setHours(d.getHours()-(+S.cut||0));return d}
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function parse(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
+function todayN(){if(!S.start)return 0;const t=pnow();t.setHours(0,0,0,0);return Math.round((t-parse(S.start))/864e5)+1}
+function dateOf(n){const d=parse(S.start);d.setDate(d.getDate()+n-1);return d.toLocaleDateString(T[lang].loc,{weekday:'long',day:'numeric',month:'long'})}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function intText(){return S.intention.trim()?esc(S.intention.trim()):T[lang].intEmpty}
+
+/* misteri del giorno */
+function mysKey(){
+ if(S.mode==='trad')return ['g','d','gl'][(day-1)%3];
+ return ['gl','g','d','gl','l','d','g'][pnow().getDay()];
+}
+
+function fs(d){S.size=Math.min(26,Math.max(15,S.size+d));document.documentElement.style.setProperty('--fs',S.size+'px');save()}
+function setStart(v){S.start=v;save();render()}
+function setMode(v){S.mode=v;save();render()}
+function setCut(v){S.cut=+v;save();open_(autoDay());render()}
+function setInt(v){S.intention=v;save();document.querySelectorAll('.intShow').forEach(s=>s.innerHTML=intText())}
+function open_(n){day=Math.min(N,Math.max(1,n));const b=S.beads[day];aves=Array.isArray(b)&&b.length===5?b.slice():[0,0,0,0,0];S.cur=day;save()}
+function storeAves(){aves.some(x=>x)?S.beads[day]=aves.slice():delete S.beads[day];save()}
+/* tocca il pallino i della decina d: le Ave arrivano fino a lì (ritoccare l’ultimo lo toglie) */
+function ave(d,i){
+ aves[d]=(aves[d]===i+1)?i:i+1;
+ storeAves();paintDec(d);paintStatus();
+ if(aves[d]===10&&d<4){const nx=document.getElementById('dec'+(d+1));nx&&setTimeout(()=>nx.scrollIntoView({behavior:'smooth',block:'start'}),250)}
+}
+function paintDec(d){
+ const el=document.getElementById('dec'+d);if(!el)return;
+ el.classList.toggle('done',aves[d]===10);
+ el.querySelectorAll('.aves button').forEach((b,i)=>b.classList.toggle('on',i<aves[d]));
+ el.querySelector('.st').textContent=aves[d]===10?'✓ '+T[lang].decDone:T[lang].decLeft(aves[d]);
+}
+function mark(){const i=S.done.indexOf(day);if(i<0){S.done.push(day);S.doneOn[day]=iso(pnow());delete S.beads[day]}else{S.done.splice(i,1);delete S.doneOn[day]}save();render();window.scrollTo({top:0,behavior:'smooth'})}
+function reset(){if(confirm(T[lang].confirm)){S.start='';S.done=[];S.doneOn={};S.beads={};S.cur=0;save();open_(1);render();window.scrollTo({top:0,behavior:'smooth'})}}
+
+/* il giorno sale da solo: è il successivo all’ultimo pregato.
+   Se l’ultimo l’hai pregato oggi, resta quello fino a domani. */
+function lastDone(){return S.done.length?Math.max(...S.done):0}
+function when(d){if(!d)return '';const t=pnow();t.setHours(0,0,0,0);const g=Math.round((t-parse(d))/864e5);const U=T[lang];return g===0?U.today:g===1?U.yesterday:parse(d).toLocaleDateString(U.loc,{weekday:'long',day:'numeric',month:'long'})}
+function autoDay(){const l=lastDone();if(!l)return 1;return S.doneOn[l]===iso(pnow())||l===N?l:l+1}
+function firstOpenDec(){for(let d=0;d<5;d++)if(aves[d]<10)return d;return -1}
+function statusBox(){
+ const l=lastDone(), t=todayN(), U=T[lang];
+ if(!S.start)return `<p class='rubric'>${U.pick}</p>`;
+ if(t<1&&!l)return `<p class='today'>${U.willStart(dateOf(1))}</p>`;
+ if(l===N)return `<p class='today'>${U.completed(S.doneOn[N]?when(S.doneOn[N]):'')}</p>`;
+ let h=`<p class='today'>${U.prayToday(day)}</p>`;
+ if(S.done.includes(day))h=`<p class='today'>${U.prayedToday(day)}</p>`;
+ else if(aves.some(x=>x)){const d=firstOpenDec();if(d>=0)h+=`<p class='rubric'>${U.stopped(d,aves[d])}</p>`}
+ else if(l)h+=`<p class='rubric'>${U.lastDay(l,S.doneOn[l]?when(S.doneOn[l]):'')}</p>`;
+ if(day===HALF+1&&!S.done.includes(day))h+=`<p class='rubric'>${U.rinStart}</p>`;
+ return h}
+function paintStatus(){const s=document.getElementById('status');if(s)s.innerHTML=statusBox()}
+
+function paint(){
+ const U=T[lang];
+ document.documentElement.lang=lang;
+ document.title=U.title;
+ const m=document.querySelector("meta[name='apple-mobile-web-app-title']");if(m)m.content=U.appTitle;
+ document.getElementById('h1').textContent=U.h1;
+ document.getElementById('sub').textContent=U.sub;
+ document.getElementById('foot').innerHTML=U.foot;
+ const bk=document.getElementById('back');bk.textContent=U.back;bk.href='../?lang='+lang;
+ document.getElementById('fsMinus').setAttribute('aria-label',U.smaller);
+ document.getElementById('fsPlus').setAttribute('aria-label',U.bigger);
+ document.getElementById('bES').className=lang==='es'?'on':'';
+ document.getElementById('bIT').className=lang==='it'?'on':'';
+ document.getElementById('bES').setAttribute('aria-pressed',lang==='es');
+ document.getElementById('bIT').setAttribute('aria-pressed',lang==='it');
+}
+function setLang(l){if(l!=='es'&&l!=='it')return;lang=l;try{localStorage.setItem('novenas-lang',l)}catch(e){}try{history.replaceState(null,'','?lang='+l+location.hash)}catch(e){}paint();render()}
+
+/* testo di una parte: |GRACE| = punto in cui si presenta la grazia; |KISS|…|KISSR| = bacio della corona */
+function part(txt,graceRub){
+ const U=T[lang];
+ return txt.split('|GRACE|').map((seg,j,arr)=>{
+  let s=seg;
+  if(s.includes('|KISS|')){const [a,rest]=s.split('|KISS|');const [b,c]=rest.split('|KISSR|');s=`${a}</p><p><i>${b}</i></p><p class='rubric'>${U.kiss}</p><p>${c}`}
+  return `<p>${s}</p>`+(j<arr.length-1?`<div class='grace'>${graceRub}<span class='int intShow'>${intText()}</span></div>`:'');
+ }).join('');
+}
+function vr(p){return `<p><span class='v'>V.</span>${p[0]}<br><span class='v'>R.</span>${p[1]}</p>`}
+
+function render(){
+ const isDone=S.done.includes(day), U=T[lang], X=TX[lang];
+ const rin=day>HALF, k=Math.floor(((rin?day-HALF:day)-1)/9)+1;
+ const mk=mysKey(), M=X.MYS[mk];
+ const parts=rin?X.RIN:X.SUP, END=rin?X.RIN_END:X.SUP_END;
+ const why=S.mode==='trad'?U.whyTrad:U.whyWeek(U.wd[pnow().getDay()]);
+ const salve=`<details><summary>${rin&&lang==='it'?U.gloriaShort+' '+U.salveShort:U.salveShort}</summary>${rin&&lang==='it'?`<p>${X.GLORIA}</p>`:''}<p>${X.SALVE}</p></details>`;
+ app.innerHTML=`
+<section class='card'>
+  <div class='label'>${U.path}</div>
+  <div class='row'><label for='start'>${U.start}</label><input type='date' id='start' lang='${U.loc}' value='${S.start}' onchange='setStart(this.value)'>${!S.start?`<button class='link' onclick='setStart("${iso(pnow())}")'>${U.startToday}</button>`:''}</div>
+  <div id='status'>${statusBox()}</div>
+  <div class='progress'><i style='width:${S.done.length/N*100}%'></i></div>
+  <p class='rubric'>${U.daysOf(S.done.length)}${S.start?` <button class='link' onclick='reset()'>${U.restart}</button>`:''}</p>
+  <div class='row' style='margin-top:10px'><label for='mode'>${U.mysMode}</label><select id='mode' onchange='setMode(this.value)'><option value='week'${S.mode!=='trad'?' selected':''}>${U.modeWeek}</option><option value='trad'${S.mode==='trad'?' selected':''}>${U.modeTrad}</option></select></div>
+  <p class='rubric'>${U.modeNote}</p>
+  <div class='row' style='margin-top:10px'><label for='cut'>${U.cutLbl}</label><select id='cut' onchange='setCut(this.value)'>${[0,1,2,3,4,5,6].map(h=>`<option value='${h}'${(+S.cut)===h?' selected':''}>${U.cutOpt(h)}</option>`).join('')}</select></div>
+  <p class='rubric'>${U.cutNote(+S.cut)}</p>
+</section>
+
+${standalone?'':`<section class='card'>
+  <div class='label'>${U.keepTitle}</div>
+  <p class='rubric'>${U.keepText}</p>
+</section>`}
+
+<section class='card'>
+  <div class='label'>${U.graceTitle}</div>
+  <textarea placeholder='${U.gracePh}' oninput='setInt(this.value)'>${esc(S.intention)}</textarea>
+  <p class='rubric'>${U.graceNote}</p>
+</section>
+
+<section class='card'>
+  <div class='label'>${U.dayOf(day)}</div>
+  <span class='phase'>${rin?U.phaseRin(k):U.phaseSup(k)}</span>
+  <h2>${rin?U.titleRin:U.titleSup}</h2>
+  <p class='today'>${U.todayMys(M[0],why)}</p>
+  <details><summary>${U.prayers}</summary>
+    <p><b>${U.pater}.</b> ${X.PATER}</p><p><b>${U.ave}.</b> ${X.AVE}</p><p><b>${U.gloria}.</b> ${X.GLORIA}</p><p><b>${U.salve}.</b> ${X.SALVE}</p>
+  </details>
+  <p class='rubric'>${U.prep}</p>
+  ${rin?'':`<h3>${U.caterinaT}</h3><p class='rubric'>${U.caterinaR}</p><p>${X.CATERINA}</p>`}
+  ${vr(X.DEUS)}
+  <p>${X.GLORIA}</p>
+
+  ${parts.map((txt,i)=>`
+  <h3><span class='num'>${ROMAN[i]}</span></h3>
+  ${part(txt,i===3?U.graceAsk:U.graceRepeat)}
+  ${salve}
+  <div class='dec${aves[i]===10?' done':''}' id='dec${i}'>
+    <div class='mys'><small>${U.decLabel(i,U.mysAdj[mk])}</small>${M[1][i]}</div>
+    <p class='rubric'>${U.decRub}</p>
+    <div class='aves'>${Array.from({length:10},(_,j)=>`<button class='${j<aves[i]?'on':''}' onclick='ave(${i},${j})' aria-label='${U.ave} ${j+1}'>${j+1}</button>`).join('')}</div>
+    <div class='st'>${aves[i]===10?'✓ '+U.decDone:U.decLeft(aves[i])}</div>
+  </div>`).join('')}
+
+  <h3>${U.final}</h3>
+  <p>${X.SALVE}</p>
+  ${(END.pre||[]).map(vr).join('')}
+  ${vr(END.v)}
+  <h3>${U.oremus}</h3>
+  <p>${END.or}</p>
+  <p class='rubric'>${U.credits}</p>
+  <button class='btn ${isDone?'done':''}' onclick='mark()'>${isDone?U.undo(day):U.markDay(day)}</button>
+</section>`;
+}
+
+/* riapre dove ti eri fermato: decina e Ave a cui eri arrivato */
+function resume(){
+ if(S.done.includes(day)||!aves.some(x=>x))return;
+ const d=firstOpenDec(); const el=d>=0?document.getElementById('dec'+d):null;
+ if(!el)return;
+ const go=()=>el.scrollIntoView({block:'center'});
+ setTimeout(go,150);
+ /* i font cambiano l’altezza del testo: riallinea quando sono pronti */
+ try{document.fonts&&document.fonts.ready.then(()=>setTimeout(go,50))}catch(e){}
+}
+try{history.scrollRestoration='manual'}catch(e){}
+
+document.documentElement.style.setProperty('--fs',S.size+'px');
+open_(autoDay());
+paint();
+render();
+resume();
+let lastMys=mysKey();
+document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if(autoDay()!==day){open_(autoDay());render();resume()}else if(mysKey()!==lastMys)render();lastMys=mysKey()});
+</script>
+</body>
+</html>

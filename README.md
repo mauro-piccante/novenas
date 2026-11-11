@@ -9,6 +9,7 @@ https://mauro-piccante.github.io/novenas/
 | Treintena a San José | `san-jose/` |
 | Novena a San Rafael Arcángel | `san-rafael/` |
 | Novena de las Rosas a Santa Teresita | `santa-teresita/` |
+| Novena del Rosario de 54 días (Pompeya) | `rosario-pompei/` |
 
 Cada carpeta es un solo `index.html`, sin dependencias ni build. Idioma con `?lang=es` o `?lang=it`
 (se recuerda en `localStorage`, clave `novenas-lang`). El progreso se guarda solo en el navegador.
